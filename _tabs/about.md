@@ -3,12 +3,10 @@ title: About
 icon: fas fa-info
 order: 4
 ---
+### Hi there, I'm thanhtunguet 👋
 
-<div class="container">
-  <div class="row">
-    <div class="col" style="align-items: flex-start;">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thanhtunguet" alt="Top langs">
-      <img src="https://github-readme-stats.vercel.app/api?username=thanhtunguet&show_icons=true&hide_border=true" alt="GitHub stats">
-    </div>
-  </div>
-</div>
+![visitors](https://visitor-badge.glitch.me/badge?page_id=thanhtunguet.thanhtunguet)
+
+![top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=thanhtunguet)
+
+![github stats](https://github-readme-stats.vercel.app/api?username=thanhtunguet&show_icons=true&hide_border=true)
