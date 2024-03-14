@@ -30,15 +30,15 @@ Kể từ năm 2020 trở đi, trên thị trường đang duy trì 2 dòng máy
 
 - Mỗi kiến trúc một bản dựng tương ứng
 
-![picture 1](/assets/images/584f7b17a60b0691e93cc9be9ba8d111210fa1caf4e53d1fc95112ea1780a1d9.png)
+![picture 11](/assets/img/1bf577b6d241c9878e0fcd561bdced5ba5830e6e3eb72f14bc916ad788c785bd.png)  
 
 - Universal dùng chung
 
-![picture 2](/assets/images/1b33cdc91da54ac3c09be18504d929e8315bdfd3b77196974aabbb1ebaa4bbe7.png)
+![picture 13](/assets/img/cfde445227764c9e27c09433e3e5f91fe3a3e16944a27e533cf17ada750ece9f.png)  
 
 Bạn cần nắm rõ loại Chip của máy để lựa chọn bản dựng tương ứng cho các phần mềm mình sử dụng. Để kiểm tra loại Chip, từ Apple Menu (Logo quả táo), chọn **About this Mac**:
 
-![picture 5](/assets/images/eab8ab12c4fab7af1533aa68666c38d91680e25231f65217925e7dccae0c86de.png)
+![picture 10](/assets/img/ba8094b2008eee21b821bb7175442f27a4458915e43467db3c8999d88d6ce386.png)  
 
 ## Cài đặt Command-line tools và Homebrew
 
