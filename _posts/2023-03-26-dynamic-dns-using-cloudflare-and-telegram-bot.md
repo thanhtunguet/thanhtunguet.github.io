@@ -176,13 +176,13 @@ CHAT_ID="Your chat id"
 YOUR_DOMAIN="*.example.com"
 DNS_SERVER="8.8.8.8"
 
-# Function có nhiệm vụ gửi tin nhắn từ bot telegram đến tài khoản chỉ định
+# Send a message to a specific Telegram account
 function sendChat() {
     curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
          -d "chat_id=${CHAT_ID}" \
         -d "text=$1"
 }
-# Câu lệnh Curl cho Cloudflare
+# Function to call Cloudflare API
 function cloudflare() {
   if [ -z "$CF_EMAIL" ]; then
       curl -sSL \
@@ -200,22 +200,21 @@ function cloudflare() {
   fi
 }
 
-# Lấy địa chỉ IP công khai hiện tại của máy tính
+# Get current public IP address of your network
 PUBLIC_IP=$(curl -s https://checkip.amazonaws.com)
-# Lấy địa chỉ IP hiện tại của DNS
+# Get current DNS setting of your domain
 CURRENT_IP=$(nslookup "${YOUR_DOMAIN}" ${DNS_SERVER} | awk '/^Address: / { print $2 }')
 
-# So sánh 2 IP
+# Compare 2 IP addresses
 if [ "$CURRENT_IP" != "$PUBLIC_IP" ]; then
-    # Nếu khác nhau, thông báo và cập nhật IP
-    sendChat "Current public IP is: ${PUBLIC_IP} was different from current Cloudflare setting: ${CURRENT_IP} and has been updated"
+    # If your IP address has changed
+    sendChat "The public IP address has changed from: ${CURRENT_IP} to ${PUBLIC_IP}. DNS setting has been updated!"
     cloudflare -X PUT \
       "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records/${RECORD_ID}" \
       --data "{\"type\":\"A\",\"name\":\"*\",\"content\":\"${PUBLIC_IP}\",\"ttl\":1,\"proxied\":false}"
 else
-    # Nếu không khác, bỏ qua
-    echo "Current public IP is up to date"
-    # Do nothing
+    # If the setting is up to date, do nothing
+    echo "Current DNS setting is up to date"
 fi
 ```
 
