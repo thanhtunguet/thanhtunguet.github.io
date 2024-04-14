@@ -44,7 +44,7 @@ console=serial0,115200 console=tty1 root=PARTUUID=96955a5f-02 rootfstype=ext4 fs
 #!/bin/bash
 
 # Set K3S_VERSION to the desired version
-export INSTALL_K3S_VERSION=v1.26.12+k3s1
+export INSTALL_K3S_VERSION=v1.27.11+k3s1
 export DOMAIN="thanhtunguet.info"
 export K3S_EMAIL="admin@${DOMAIN}"
 export RANCHER_HOSTNAME="rancher.${DOMAIN}"
@@ -75,7 +75,6 @@ helm repo update
 helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.11.0 \
   --set installCRDs=true
 ```
 
