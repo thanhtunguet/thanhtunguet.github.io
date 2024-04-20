@@ -599,6 +599,12 @@ With Google Assistant integrated, I can effortlessly issue voice commands to rem
 
 ![alt text](/assets/img/IMG_3923.PNG)
 
-### 7\. Conclusion: Empowering Your Smart Home Ecosystem
+### 7\. Conclusion
 
-In conclusion, the implementation of a .NET Core service for remote PC control has revolutionized my smart home setup. Through meticulous code execution and strategic integration, I've bridged the gap between traditional computing and modern home automation. With remote power control at my fingertips, I've unlocked new levels of convenience and accessibility in managing my devices.
+In this journey to enhance home automation through voice-controlled commands, I have successfully implemented a .NET Core service capable of remotely managing the power state of my PC using Google Action and Raspberry Pi. By leveraging technologies such as Wake on LAN and UDP socket communication, I have empowered myself to control my PC effortlessly using voice commands via the Google Assistant.
+
+Through meticulous code implementation and integration with Google's Smart Home platform, I have established a seamless connection between the Google Assistant and my .NET Core service, enabling intuitive and efficient control over my PC's power state from anywhere.
+
+The choice of Raspberry Pi as the hosting platform for the .NET Core service reflects a commitment to energy efficiency and reliability, ensuring that the service remains operational round the clock without imposing significant energy costs.
+
+As I continue to refine and expand the capabilities of my home automation setup, I invite fellow enthusiasts to explore the source code of this project on GitHub: [SmartHomePCControl](https://github.com/thanhtunguet/SmartHomePCControl). Your contributions and feedback are invaluable as we collectively strive to build smarter and more connected homes for the future.
