@@ -1,8 +1,8 @@
 ---
-title: "Minify all JS and CSS files in a given directory, using Node.js"
+title: "Asked ChatGPT: Minify all JS and CSS files in a given directory, using Node.js"
 date: 2024-03-09 00:01:00 +0700
-categories: [Programming, Javascript]
-tags: [Programming, Javascript, Scripts]
+categories: [AI, "Asked ChatGPT"]
+tags: [AI, "Asked ChatGPT", Programming, Javascript, Scripts]
 pin: false
 ---
 
