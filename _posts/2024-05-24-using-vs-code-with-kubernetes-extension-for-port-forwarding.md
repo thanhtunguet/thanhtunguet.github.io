@@ -37,7 +37,7 @@ To connect to your Kubernetes cluster, you'll need the `kubeconfig` file from Ra
 2. Navigate to the cluster you want to connect to.
 3. Click on the "Kubeconfig File" button to download the `kubeconfig` file. Alternatively, you can click "Copy to Clipboard" to copy the content of the `kubeconfig` file.
 
-![alt text](</assets/img/Screenshot 2024-05-24 at 20.24.03.png>)
+![alt text](</assets/img/Screenshot 2024-05-24 at 20.34.18.png>)
 
 ### Step 3: Adding a New Cluster to Kubernetes on VSCode
 
