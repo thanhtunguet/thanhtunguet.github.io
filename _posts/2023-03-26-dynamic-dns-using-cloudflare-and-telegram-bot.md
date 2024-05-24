@@ -1,8 +1,8 @@
 ---
 title: Giải quyết vấn đề Dynamic IP với Cloudflare API và Telegram Bot
 date: 2023-03-26 19:10:00 +0700
-categories: [Devops, Cloudflare]
-tags: [Devops, DNS, Cloudflare, "Scripts"]
+categories: [Devops, Networks]
+tags: [Devops, DNS, Networks, Cloudflare, "Scripts"]
 pin: false
 ---
 

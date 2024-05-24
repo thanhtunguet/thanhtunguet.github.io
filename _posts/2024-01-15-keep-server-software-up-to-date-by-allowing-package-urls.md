@@ -65,7 +65,7 @@ By allowing package URLs for Docker and Ubuntu, you can strike a balance between
 ## URL table
 
 | Software | URLs                                                                                                               | Description         |
-|----------|--------------------------------------------------------------------------------------------------------------------|---------------------|
+| -------- | ------------------------------------------------------------------------------------------------------------------ | ------------------- |
 | Docker   | [https://download.docker.com/linux/ubuntu](https://download.docker.com/linux/ubuntu)                               | Docker Repository   |
 |          | [https://download.docker.com/linux/ubuntu/gpg](https://download.docker.com/linux/ubuntu/gpg)                       | GPG Key             |
 |          | [https://registry-1.docker.io](https://registry-1.docker.io/)                                                      | Docker Hub (Images) |

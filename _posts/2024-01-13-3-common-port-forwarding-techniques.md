@@ -1,8 +1,8 @@
 ---
 title: "A Comprehensive Comparison of 3 Port-Forwarding Techniques: Linux UFW, Nginx Stream Proxy, and SSH Port-Forwarding"
 date: 2024-01-13 10:10:00 +0700
-categories: [Networks, Port Forwarding]
-tags: [Networks, Devops, Linux, Port Forwarding]
+categories: [Devops, Networks]
+tags: [Devops, Networks, Linux, Port Forwarding]
 pin: false
 ---
 
@@ -83,7 +83,7 @@ ssh -L local_port:destination_ip:destination_port user@remote_server
 Now, let's compare these three port-forwarding techniques using a table:
 
 | Technique           | Ease of Use                                        | Versatility                                                  | Security            |
-|---------------------|----------------------------------------------------|--------------------------------------------------------------|---------------------|
+| ------------------- | -------------------------------------------------- | ------------------------------------------------------------ | ------------------- |
 | Linux UFW           | Easy to use, beginner-friendly                     | Limited to basic port-forwarding                             | Moderate security   |
 | Nginx Stream Proxy  | Requires some configuration knowledge              | Highly versatile, suitable for complex use cases             | Robust and reliable |
 | SSH Port-Forwarding | Requires SSH knowledge and access to remote server | Versatile, suitable for remote access over encrypted tunnels | Highly secure       |

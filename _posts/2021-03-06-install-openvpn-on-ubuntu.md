@@ -1,8 +1,8 @@
 ---
 title: Cài đặt OpenVPN trên Ubuntu
 date: 2020-04-17 19:10:00 +0700
-categories: ["Networks", VPN]
-tags: ["Networks", "VPN", "OpenVPN"]
+categories: ["Devops", Networks]
+tags: ["Devops", "Networks", "OpenVPN"]
 pin: false
 ---
 

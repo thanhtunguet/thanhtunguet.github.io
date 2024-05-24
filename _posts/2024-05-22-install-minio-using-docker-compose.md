@@ -1,8 +1,8 @@
 ---
 title: "Setting Up MinIO with Docker Compose"
 date: 2024-05-22 00:01:00 +0700
-categories: [Linux, "Docker"]
-tags: ["Linux", "Docker", "MinIO", "Docker Compose"]
+categories: [Devops, "Docker"]
+tags: ["Devops", "Docker", "MinIO", "Docker Compose"]
 pin: false
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "Asked ChatGPT: Avoid entering password when using xRDP on Linux"
+title: "Avoid entering password when using xRDP on Linux"
 date: 2024-05-10 00:01:00 +0700
-categories: [AI, "Asked ChatGPT"]
-tags: [AI, "ChatGPT", "Asked ChatGPT"]
+categories: [Devops, "Linux"]
+tags: [Devops, Linux]
 pin: false
 ---
 

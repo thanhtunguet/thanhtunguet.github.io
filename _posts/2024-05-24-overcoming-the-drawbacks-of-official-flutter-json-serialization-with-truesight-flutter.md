@@ -2,7 +2,7 @@
 title: "Overcoming the Drawbacks of Official Flutter JSON Serialization with truesight_flutter"
 date: 2024-05-24 00:01:00 +0700
 categories: [Mobile Development, "Flutter"]
-tags: ["Mobile Development", "Flutter"]
+tags: ["Mobile Development", "Flutter", Programming]
 pin: false
 ---
 

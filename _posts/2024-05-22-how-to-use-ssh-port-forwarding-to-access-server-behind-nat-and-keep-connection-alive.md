@@ -1,8 +1,8 @@
 ---
 title: "How to Use SSH Port Forwarding to Access Your Server Behind NAT and Keep Connection Alive"
 date: 2024-05-22 00:01:00 +0700
-categories: [Linux]
-tags: ["Linux"]
+categories: [Devops, Linux]
+tags: ["Devops", Linux]
 pin: false
 ---
 

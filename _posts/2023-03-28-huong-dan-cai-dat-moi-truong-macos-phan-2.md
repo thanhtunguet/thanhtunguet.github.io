@@ -2,7 +2,7 @@
 title: Hướng dẫn cài đặt môi trường cho MacOS phục vụ lập trình Mobile (Phần 2)
 date: 2023-03-28 13:10:00 +0700
 categories: ["Mobile Development", MacOS]
-tags: ["Mobile Development", MacOS, Setup]
+tags: ["Mobile Development", MacOS]
 pin: false
 ---
 
