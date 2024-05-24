@@ -55,9 +55,10 @@ Now that you have your `kubeconfig` file, you can add your Kubernetes cluster to
 With the cluster added, you can now forward ports from your Kubernetes pods to your local machine. Follow these steps:
 
 1. Open the Kubernetes view in VSCode by clicking on the Kubernetes icon in the Activity Bar.
-2. Expand your cluster and navigate to the "Workloads" section to see your pods.
+2. Expand your cluster and navigate to the `Workloads` => `Pods` section to see your services.
 3. Right-click on the pod you want to forward ports from and select `Port Forward`.
 4. Specify the local port and the pod port you want to forward.
+5. You can also forwards service's ports by navigating to the `Networks` section.
 
 ![alt text](</assets/img/Screenshot 2024-05-24 at 20.27.09.png>)
 
