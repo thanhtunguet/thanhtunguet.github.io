@@ -7,6 +7,24 @@ title: 'Hi there  👋'
 
 Welcome to my blog! My name is Pham Thanh Tung, and I was born in 1997. I currently reside in the vibrant city of Hanoi, Vietnam. I am a passionate and versatile engineer with expertise spanning multiple domains, including DevOps, mobile development, open source development, technical blogging, and generative AI. Here's a bit more about my journey and areas of expertise:
 
+
+## GitHub activity stats
+
+<!-- ![visitors](https://visitor-badge.glitch.me/badge?page_id=thanhtunguet.thanhtunguet) -->
+
+<div class="container">
+  <div class="row">
+    <div class="col" style="align-items: flex-start;">
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thanhtunguet" alt="Top langs">
+    </div>
+    <div class="col">
+      <img src="https://github-readme-stats.vercel.app/api?username=thanhtunguet&show_icons=true&hide_border=true" alt="GitHub stats">
+    </div>
+  </div>
+</div>
+
+## Expertise
+
 ### DevOps Engineer
 
 As a DevOps engineer, I have a deep understanding of:
@@ -61,30 +79,6 @@ Best regards,
 
 Pham Thanh Tung
 
-## GitHub activity stats
-
-<!-- ![visitors](https://visitor-badge.glitch.me/badge?page_id=thanhtunguet.thanhtunguet) -->
-
-<div class="container">
-  <div class="row">
-    <div class="col" style="align-items: flex-start;">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thanhtunguet" alt="Top langs">
-    </div>
-    <div class="col">
-      <img src="https://github-readme-stats.vercel.app/api?username=thanhtunguet&show_icons=true&hide_border=true" alt="GitHub stats">
-    </div>
-  </div>
-</div>
-
-## Contacts
-
-| Social                                         | Link                                                                |
-| ---------------------------------------------- | ------------------------------------------------------------------- |
-| <i class="fa-brands fa-linkedin"></i> LinkedIn | [thanhtunguet](https://www.linkedin.com/in/thanhtunguet/)           |
-| <i class="fa-brands fa-github"></i> GitHub     | [thanhtunguet](https://github.com/thanhtunguet)                     |
-| <i class="fa-brands fa-x-twitter"></i> Twitter | [thanhtunguet](https://twitter.com/thanhtunguet)                    |
-| <i class="fa-brands fa-facebook"></i> Facebook | [ThanhTung.Pham.1997](https://www.facebook.com/ThanhTung.Pham.1997) |
-
 <!--
 **thanhtunguet/thanhtunguet** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -99,3 +93,14 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+
+## Contacts
+
+| Social                                         | Link                                                                |
+| ---------------------------------------------- | ------------------------------------------------------------------- |
+| <i class="fa-brands fa-linkedin"></i> LinkedIn | [thanhtunguet](https://www.linkedin.com/in/thanhtunguet/)           |
+| <i class="fa-brands fa-github"></i> GitHub     | [thanhtunguet](https://github.com/thanhtunguet)                     |
+| <i class="fa-brands fa-x-twitter"></i> Twitter | [thanhtunguet](https://twitter.com/thanhtunguet)                    |
+| <i class="fa-brands fa-facebook"></i> Facebook | [ThanhTung.Pham.1997](https://www.facebook.com/ThanhTung.Pham.1997) |
+
