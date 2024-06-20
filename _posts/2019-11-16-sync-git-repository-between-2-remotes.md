@@ -1,61 +1,61 @@
 ---
-title: Đồng bộ các nhánh của 2 Git repository thuộc 2 server khác nhau
+title: How to Move a Git Repository with Multiple Branches to a New Server Using a Bash Script
 date: 2019-11-16 19:10:00 +0700
 categories: [Devops, Git]
 tags: [Devops, Git, Tools, "Scripts"]
 pin: false
 ---
 
-## Đặt vấn đề
+# Introduction
 
-Bạn muốn chuyển một repository sang một git server mới, và repo của bạn có quá nhiều nhánh và không thể chuyển thủ công từng nhánh một được.
+You want to move a repository to a new git server, but your repo has too many branches to move them one by one.
 
-## Giải pháp
+# Solution
 
-Ta sử dụng một bash script đơn giản để lấy toàn bộ danh sách nhánh từ remote của repo gốc (`origin`), và push nó sang repo mới (`dest`)
+We will use a simple bash script to get the list of branches from the original repo's remote (`origin`) and push them to the new repo's remote (`dest`).
 
-### Cú pháp
+## Syntax
 
-Trước tiên, để thuận tiện sử dụng cho script, ta hình dung ra cú pháp mà mình sẽ sử dụng nó:
+First, let's define the syntax for our script:
 
 ```bash
 ./sync.sh path-to-directory origin dest
 ```
 
-Trong đó:
+In this script:
 
-- `origin` và `dest` là 2 remote được gán vào trong repo local mà ta clone về
-- `path-to-directory` là đường dẫn tương đối đến thư mục chứa repo local
+- `origin` and `dest` are the two remotes set in the local repo you cloned.
+- `path-to-directory` is the relative path to the directory containing your local repo.
 
-### Bước 1: Clone repo gốc
+## Step 1: Clone the Original Repo
 
-Clone repo gốc
+Clone the original repo:
 
 ```bash
-clone git://path-to-your-repo
+git clone git://path-to-your-repo
 cd your-repo
 git fetch --all
 ```
 
-### Bước 2: Gán repo đích
+## Step 2: Add the New Repo Remote
 
-Gán URL của repo đích vào repo local mình vừa clone về
+Add the URL of the new repo to your local repo:
 
 ```bash
 git remote add dest git://path-to-your-remote-dest
 ```
 
-### Bước 3: Lấy danh sách nhánh
+## Step 3: Get the List of Branches
 
-Lấy danh sách tên nhánh từ remote gốc, ta cần cắt phần tên remote trong tên nhánh. Ví dụ `origin/master` thành `master`
+Get the list of branch names from the original remote. We need to remove the remote part from the branch name, e.g., `origin/master` becomes `master`:
 
 ```bash
 git branch -r | grep -v '\->' | grep 'origin/' | sed "s/origin\///g"
 ```
 
-### Bước 4: Sync các nhánh
+## Step 4: Sync the Branches
 
-Thực hiện sync tất cả các nhánh, ở đây ta sẽ dùng vòng lặp while
+Sync all branches using a while loop:
 
 ```bash
 function sync {
@@ -71,9 +71,9 @@ function sync {
 }
 ```
 
-### Script hoàn chỉnh
+## Complete Script
 
-Từ các bước ở trên, ta có script hoàn chỉnh như sau:
+Combining the steps above, we have the complete script:
 
 ```bash
 #!/bin/bash
@@ -108,10 +108,10 @@ git fetch $dest;
 git branch -r | grep -v '\->' | grep $src/ | sed "s/$src\///g" | sync
 ```
 
-Ở đây ta sử dụng `$src` và `$dest` làm tên 2 remote, 2 biến này sẽ được truyền vào từ câu lệnh gọi script
+Here, we use `$src` and `$dest` as the names of the two remotes. These variables are passed into the script when it's called:
 
 ```bash
 ./sync.sh path-to-directory src-remote dest-remote
 ```
 
-Gist: [https://gist.github.com/thanhtunguet/bac5a6b6fc21a6b0ada66cc7fee1e776](https://gist.github.com/thanhtunguet/bac5a6b6fc21a6b0ada66cc7fee1e776)
+You can find this script on Gist: [https://gist.github.com/thanhtunguet/bac5a6b6fc21a6b0ada66cc7fee1e776](https://gist.github.com/thanhtunguet/bac5a6b6fc21a6b0ada66cc7fee1e776)

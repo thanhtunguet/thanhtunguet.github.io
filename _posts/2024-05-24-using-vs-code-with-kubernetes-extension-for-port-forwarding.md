@@ -6,8 +6,6 @@ tags: ["Devops", "Kubernetes", "Rancher", "Visual Studio Code"]
 pin: false
 ---
 
-# Using Visual Studio Code with Kubernetes Extension for Port Forwarding
-
 Visual Studio Code (VSCode) is a powerful and versatile code editor with a wide range of extensions to enhance your development workflow. One such extension is the Kubernetes extension, which allows you to manage Kubernetes clusters directly from VSCode. In this article, we'll explore how to use the Kubernetes extension to forward ports from Kubernetes pods to your local machine. Additionally, we'll cover how to add a new cluster to Kubernetes on VSCode by setting up the `kubeconfig` file, which can be obtained from Rancher.
 
 ## Prerequisites

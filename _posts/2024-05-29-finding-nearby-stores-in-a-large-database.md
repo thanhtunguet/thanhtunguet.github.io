@@ -4,10 +4,10 @@ date: 2024-05-29 00:01:00 +0700
 categories: [Programming, .NET Core]
 tags: [Programming, .NET Core]
 pin: false
+mermaid: true
+image: https://evnedev.com/wp-content/uploads/2023/03/What-is-gps-app_.jpg
 ---
 
-
-## Finding Nearby Stores Using GPS Location in a Large Database with .NET Core
 
 ### Introduction
 
