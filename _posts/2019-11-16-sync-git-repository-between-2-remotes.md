@@ -1,5 +1,5 @@
 ---
-title: How to Move a Git Repository with Multiple Branches to a New Server Using a Bash Script
+title: How to Move a Git Repository with Multiple Branches to a New Server
 date: 2019-11-16 19:10:00 +0700
 categories: [Devops, Git]
 tags: [Devops, Git, Tools, "Scripts"]

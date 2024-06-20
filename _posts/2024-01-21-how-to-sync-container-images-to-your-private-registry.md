@@ -4,6 +4,7 @@ date: 2024-01-21 07:45:00 +0700
 categories: [Devops, Docker]
 tags: [Devops, Linux, Docker, Private Registry]
 pin: false
+image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDJHmIjtpUQRNbX82alVhC7sRSs3pZw8Pklg&s
 ---
 
 Introduction

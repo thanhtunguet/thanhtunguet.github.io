@@ -4,6 +4,7 @@ date: 2024-01-18 10:10:00 +0700
 categories: [Devops, Raspberry Pi]
 tags: [Devops, Linux, Raspberry Pi]
 pin: false
+image: https://spin.atomicobject.com/wp-content/uploads/raspberry-pi-1.jpg
 ---
 
 In environments where network devices receive dynamic IP addresses via DHCP (Dynamic Host Configuration Protocol), locating a specific device like a Raspberry Pi can be a challenge. This is particularly true in scenarios where you don't have access to the network router or admin interface to check connected devices. One practical solution is to set up a UDP broadcast system consisting of a client and a server, allowing your Raspberry Pi to respond with its IP address when queried. In this article, we'll walk through creating such a system using C++.
