@@ -22,8 +22,15 @@
   "scss.validate": false,
   "less.validate": false,
   // Stylint extension settings
-  "stylelint.snippet": ["css", "scss"],
-  "stylelint.validate": ["css", "scss"],
+  "stylelint.snippet": [
+    "css",
+    "scss"
+  ],
+  "stylelint.validate": [
+    "css",
+    "scss"
+  ],
   "markdown-image.local.referencePath": "/assets/img/",
-  "markdown-image.local.path": "/assets/img/"
+  "markdown-image.local.path": "/assets/img/",
+  "editor.linkedEditing": true
 }
