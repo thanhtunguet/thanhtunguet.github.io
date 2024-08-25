@@ -9,7 +9,7 @@ mermaid: true
 
 In today's fast-paced development environment, managing dependencies efficiently and securely is crucial. Whether you're working on Java, Android, or any Maven-based projects, relying on external repositories like Maven Central or JCenter is a common practice. However, this approach comes with certain risks and inefficiencies. To mitigate these issues, a powerful solution is to use Sonatype Nexus to proxy all Maven packages on your own premise server.
 
-This article introduces an approach to setting up a Nexus repository to proxy all your Maven dependencies locally, explains why this practice is necessary, and provides a script to automate the process.
+This article introduces an approach to setting up a Nexus repository to proxy all your Maven dependencies locally, explains why this practice is necessary, provides a script to automate the process, and outlines how to configure your Gradle build to use these local repositories.
 
 ### Why Proxying Maven Repositories Locally is Necessary
 
@@ -150,6 +150,108 @@ done
 echo "All repositories have been created."
 ```
 
+### Configuring Gradle to Use Your Nexus Repositories
+
+After setting up your Nexus server to proxy these repositories, you'll need to configure your Gradle build to use them instead of the default repositories. Below is an example of how you can configure your `build.gradle` file to point to your Nexus server.
+
+#### Updated `build.gradle` Configuration
+
+```groovy
+repositories {
+    // Clear existing repositories
+    repositories.clear()
+
+    // Define the base URL for your Nexus server
+    def nexusUrl = "https://nexus.yourdomain.com/repository"
+
+    // Add all Nexus repositories
+    maven {
+        name = "Apache Maven"
+        url = "$nexusUrl/apache-maven/"
+    }
+    maven {
+        name = "Google Maven"
+        url = "$nexusUrl/google-maven/"
+    }
+    maven {
+        name = "Google Android Maven"
+        url = "$nexusUrl/google-android-maven/"
+    }
+    maven {
+        name = "JCenter"
+        url = "$nexusUrl/jcenter/"
+    }
+    maven {
+        name = "Gradle Plugin Portal"
+        url = "$nexusUrl/gradle-plugin-portal/"
+    }
+    maven {
+        name = "JitPack"
+        url = "$nexusUrl/jitpack/"
+    }
+    maven {
+        name = "Sonatype Snapshots"
+        url = "$nexusUrl/sonatype-snapshots/"
+    }
+    maven {
+        name = "Spring Plugins"
+        url = "$nexusUrl/spring-plugins/"
+    }
+    maven {
+        name = "Spring Milestones"
+        url = "$nexusUrl/spring-milestones/"
+    }
+    maven {
+        name = "Spring Snapshots"
+        url = "$nexusUrl/spring-snapshots/"
+    }
+    maven {
+        name = "Kotlin EAP"
+        url = "$nexusUrl/kotlin-eap/"
+    }
+    maven {
+        name = "JetBrains"
+        url = "$nexusUrl/jetbrains/"
+    }
+    maven {
+        name = "Atlassian"
+        url = "$nexusUrl/atlassian/"
+    }
+    maven {
+        name = "Apache Snapshots"
+        url = "$nexusUrl/apache-snapshots/"
+    }
+    maven {
+        name = "JBoss Releases"
+        url = "$nexusUrl/jboss-releases/"
+    }
+    maven {
+        name = "JBoss Snapshots"
+        url = "$nexusUrl/jboss-snapshots/"
+    }
+    maven {
+        name = "RedHat GA"
+        url = "$nexusUrl/redhat-ga/"
+    }
+    maven {
+        name = "RedHat EA"
+        url = "$nexusUrl/redhat-ea/"
+    }
+    maven {
+        name = "IBM Cloud Maven"
+        url = "$nexusUrl/ibm-cloud-maven/"
+    }
+    maven {
+        name = "Bintray"
+        url = "$nexusUrl/bintray/"
+    }
+}
+```
+
+#### Explanation:
+- **nexusUrl**: This is the base URL for your Nexus server. Replace `https://nexus.yourdomain.com` with the actual URL if your Nexus server is hosted elsewhere.
+- **maven { name = "..." url = "..." }**: Each block adds a repository from your Nexus server, named appropriately for clarity.
+
 ### Troubleshooting: Why Might Android Studio Still Download from `repo.maven.apache.org`?
 
 If after following these steps, Android Studio still downloads packages from `repo.maven.apache.org`, it could be due to several factors:
@@ -170,4 +272,4 @@ If after following these steps, Android Studio still downloads packages from `re
 
 Proxying Maven repositories locally on your Nexus server provides significant advantages in terms of load times, access continuity, and security. By caching your dependencies locally, you can ensure faster builds, uninterrupted access to crucial packages, and a more secure development environment. With the provided script, setting up these proxied repositories is a straightforward process, allowing you to focus on what matters most—building great software. 
 
-Should you encounter issues where dependencies are still being fetched from the original repositories, carefully review your Gradle and Android Studio configurations to ensure that everything is properly set up to use your Nexus repositories.
+After configuring your Nexus server, be sure to update your Gradle configuration as outlined above. Should you encounter issues where dependencies are still being fetched from the original repositories, carefully review your Gradle and Android Studio configurations to ensure that everything is properly set up to use your Nexus repositories.
