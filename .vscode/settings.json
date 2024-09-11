@@ -1,27 +1,24 @@
 {
-  // Prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  // Shopify Liquid
   "files.associations": {
     "*.html": "liquid"
   },
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
-  // Formatter
   "[html][liquid]": {
     "editor.defaultFormatter": "Shopify.theme-check-vscode"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  // Disable vscode built-in stylelint
   "css.validate": false,
   "scss.validate": false,
   "less.validate": false,
-
-  // Stylint extension settings
+  "markdown-image.local.referencePath": "/assets/img/",
+  "markdown-image.local.path": "/assets/img/",
+  "editor.linkedEditing": true,
   "stylelint.snippet": [
     "css",
     "scss"
@@ -30,13 +27,13 @@
     "css",
     "scss"
   ],
-  "markdown-image.local.referencePath": "/assets/img/",
-  "markdown-image.local.path": "/assets/img/",
-  "editor.linkedEditing": true,
-  "stylelint.snippet": ["css", "scss"],
-  "stylelint.validate": ["css", "scss"],
-  // Run tasks in macOS
   "terminal.integrated.profiles.osx": {
-    "zsh": { "path": "/bin/zsh", "args": ["-l", "-i"] }
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": [
+        "-l",
+        "-i"
+      ]
+    }
   }
 }
