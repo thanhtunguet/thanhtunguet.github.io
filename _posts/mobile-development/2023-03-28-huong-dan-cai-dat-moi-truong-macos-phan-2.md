@@ -14,8 +14,6 @@ XCode là một IDE do Apple phát triển và cung cấp cho các nhà phát tr
 XCode bao gồm một trình soạn thảo mã nguồn, các công cụ để thực hiện gỡ lỗi, và các công cụ để quản lý phiên bản của mã nguồn. Nó cũng cung cấp các công cụ để thiết kế giao diện người dùng và kiểm tra ứng dụng trên các thiết bị khác nhau.
 Ngoài ra, XCode cũng hỗ trợ các ngôn ngữ lập trình khác như Swift, Objective-C, C++, và các ngôn ngữ khác. Với XCode, người dùng có thể phát triển ứng dụng cho App Store và các nền tảng khác trên hệ điều hành Apple.
 
-(đoạn này nhờ Notion AI viết)
-
 Cài đặt Xcode thì khá đơn giản, vào App Store và tìm XCode rồi cài đặt là xong.
 
 ### Cài đặt Cocoapods
