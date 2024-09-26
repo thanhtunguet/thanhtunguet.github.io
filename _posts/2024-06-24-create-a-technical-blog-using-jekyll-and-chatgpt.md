@@ -5,7 +5,6 @@ categories: [Sharing, Writing]
 tags: [Sharing, Technical Blog, Writing]
 pin: false
 mermaid: true
-image: /assets/img/Screenshot 2024-06-20 at 15.32.53.png
 ---
 
 ## Introduction

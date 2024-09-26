@@ -5,7 +5,6 @@ categories: [Programming, .NET Core]
 tags: [Programming, .NET Core]
 pin: false
 mermaid: true
-image: https://evnedev.com/wp-content/uploads/2023/03/What-is-gps-app_.jpg
 ---
 
 

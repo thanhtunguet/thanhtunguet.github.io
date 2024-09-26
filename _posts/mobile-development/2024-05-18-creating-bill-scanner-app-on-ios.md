@@ -4,7 +4,6 @@ date: 2024-05-18 00:01:00 +0700
 categories: [Mobile Development, "iOS"]
 tags: ["Mobile Development", "iOS"]
 pin: false
-image: https://fitsmallbusiness.com/wp-content/uploads/2020/10/FeatureImage_receipt-scanner-app.jpg
 ---
 
 In this technical article, we will walk through the process of creating a bill scanner app on iOS using Swift and Vision framework. This app will use the iPhone camera to capture images of bills and then read the text on those bills.
