@@ -43,8 +43,7 @@ version: '3.8'
 
 services:
   minio:
-    image: quay.io/minio/minio
-    container_name: minio
+        container_name: minio
     ports:
       - "9000:9000"
       - "9001:9001"

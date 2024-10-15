@@ -4,7 +4,6 @@ date: 2024-02-04 07:45:00 +0700
 categories: [Devops, Kubernetes]
 tags: [Devops, Kubernetes, Linux, Scripts]
 pin: false
-image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7omEq76OluRHsxGp-AcVGwpY2ctbbY3RIA&s
 ---
 
 ### Introduction

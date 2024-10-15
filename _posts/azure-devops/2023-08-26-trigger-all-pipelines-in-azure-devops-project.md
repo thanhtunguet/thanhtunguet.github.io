@@ -61,14 +61,18 @@ Here's a simplified example using PowerShell:
 pat="YOUR_PERSONAL_ACCESS_TOKEN"
 organization="YOUR_ORGANIZATION"
 project="YOUR_PROJECT"
+apiVersion="7.0"
 
 # Get pipeline IDs
-pipelines=$(curl -s -H "Authorization: Basic $(echo -n :$pat | base64)" "https://dev.azure.com/$organization/$project/_apis/pipelines?api-version=6.0-preview.1")
+pipelines=$(curl -s -H "Authorization: Basic $(echo -n :$pat | base64)" "https://dev.azure.com/$organization/$project/_apis/pipelines?api-version=$apiVersion")
 
 # Trigger each pipeline
 pipeline_ids=$(echo "$pipelines" | jq -r '.value[].id')
 for pipeline_id in $pipeline_ids; do
-    curl -s -H "Authorization: Basic $(echo -n :$pat | base64)" -X POST "https://dev.azure.com/$organization/$project/_apis/pipelines/$pipeline_id/runs?api-version=6.0-preview.1"
+    curl -s -H "Authorization: Basic $(echo -n :$pat | base64)" \
+         -X POST \
+         "https://dev.azure.com/$organization/$project/_apis/pipelines/$pipeline_id/runs?api-version=$apiVersion" \
+         --data "{}"
 done
 ```
 

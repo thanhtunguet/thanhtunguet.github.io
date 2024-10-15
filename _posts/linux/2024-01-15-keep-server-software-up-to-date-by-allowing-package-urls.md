@@ -4,7 +4,6 @@ date: 2024-01-13 10:10:00 +0700
 categories: [Devops, Linux]
 tags: [Devops, Linux, Docker]
 pin: false
-image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyi2VPy_OivhUmfwZBEZMlYrzCVIGOhtYteg&s
 ---
 
 ## Introduction
