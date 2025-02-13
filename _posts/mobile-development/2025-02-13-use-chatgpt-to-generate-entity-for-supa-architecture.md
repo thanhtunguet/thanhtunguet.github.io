@@ -44,27 +44,87 @@ Let’s say you need to create an entity class for a `Product`. Your JSON might 
 ### **Step 2: Use the Right Prompt in ChatGPT**  
 To generate the entity class correctly, use the following **optimized prompt**:  
 
-```plaintext
-Act as a Flutter developer.  
+{% raw %}
+### **Act as a Flutter Developer to Convert JSON to an Entity Class**
 
-I am working with the `supa_architecture` package to handle JSON data in Flutter.  
-Your task is to convert a given JSON object into an entity class following these rules:  
+I am working with a Flutter package named **`supa_architecture`** to handle JSON data conversion into entity classes. Your task is to convert a given JSON object into a Dart entity class using this package.
 
-1. Import `supa_architecture` using:  
-   `import 'package:supa_architecture/supa_architecture.dart';`  
-2. Extend `JsonModel` for the entity class.  
-3. Define fields using `supa_architecture` types:
-   - `JsonString` for strings  
-   - `JsonInteger`, `JsonDouble`, or `JsonNumber` for numeric values  
-   - `JsonDate` for `DateTime` fields  
-   - `JsonBoolean` for booleans  
-   - `JsonObject<T>` for nested objects  
-   - `JsonList<T>` for lists of objects  
-4. Override the `fields` getter to include all fields for serialization.  
-5. Predict unknown types based on field names. If a type is uncertain, add a comment listing those fields.  
-6. Map only the first two levels of nesting. Ignore deeply nested structures.  
+### **Package Overview**
+The `supa_architecture` package provides specialized JSON data types to simplify serialization:
 
-Now, generate an entity class named `Product` from the following JSON:  
+- **`JsonString`** → Handles string fields.  
+- **`JsonInteger` / `JsonDouble` / `JsonNumber`** → Handles numerical values (`int`, `double`, `num`).  
+- **`JsonDate`** → Handles `DateTime` values.  
+- **`JsonBoolean`** → Handles `bool` values.  
+- **`JsonObject<T>`** → Handles **nested objects**.  
+- **`JsonList<T>`** → Handles **lists of objects**.  
+- **`JsonModel`** → The **base class** for all entity models (includes implicit constructor and serialization methods like `fromJson` and `toJson`).
+
+### **Entity Class Structure**
+When generating an entity class:
+1. **Import the package** → `import 'package:supa_architecture/supa_architecture.dart';`
+2. **Extend `JsonModel`** → This base class already handles JSON serialization, so **do not** implement constructors or serialization methods.
+3. **Define fields** using `supa_architecture` types (see the table above).
+4. **Override the `fields` getter** to list all JSON fields that should be serialized/deserialized.
+5. **Follow standard naming conventions**:
+   - Use **camelCase** for field names.
+   - Use **PascalCase** for entity class names.
+
+Each field should be declared in the format:
+```dart
+JsonType fieldName = JsonType("jsonFieldName");
+```
+For example:
+```dart
+JsonString name = JsonString("name");
+JsonInteger age = JsonInteger("age");
+JsonDate birthday = JsonDate("birthday");
+JsonObject<User> manager = JsonObject<User>("manager");
+JsonList<User> members = JsonList<User>("members");
+```
+
+### **Handling Nested JSON**
+- For **nested objects**, predict the class name and use `JsonObject<T>`.
+- For **lists of objects**, predict the class name and use `JsonList<T>`.
+- **Ignore third-level nested structures** (only map the first two levels).
+
+### **Handling Unknown or Unclear Data Types**
+- If a field is `null`, try to predict its data type based on its name.
+- If the type **cannot be confidently determined**, list the field names at the end of the output as a comment:  
+  ```dart
+  // Warning: Uncertain type for field "exampleField"
+  ```
+
+### **Example Output**
+Given this JSON:
+```json
+{
+    "id": 1,
+    "name": "Macbook Pro 2021",
+    "code": "MAC_PRO_2021",
+    "statusId": 1
+}
+```
+The generated Dart entity class should be:
+```dart
+import 'package:supa_architecture/supa_architecture.dart';
+
+class Product extends JsonModel {
+    @override
+    List<JsonField> get fields => [id, name, code, statusId];
+
+    JsonInteger id = JsonInteger("id");
+    JsonString name = JsonString("name");
+    JsonString code = JsonString("code");
+    JsonInteger statusId = JsonInteger("statusId");
+}
+```
+
+### **Final Instructions**
+- Ensure the output is properly formatted.
+- If any field type **may be incorrect**, add a comment listing uncertain fields.
+
+Now, generate the Dart entity class for the following JSON:
 
 ```json
 {
@@ -74,7 +134,8 @@ Now, generate an entity class named `Product` from the following JSON:
     "statusId": 1
 }
 ```
-```
+
+{% endraw %}
 
 ### **Step 3: Review and Use the Generated Entity**  
 ChatGPT will generate the following Dart entity class:  
