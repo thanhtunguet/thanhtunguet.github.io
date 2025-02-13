@@ -87,7 +87,3 @@ Now, generate the Dart entity class for the following JSON:
     "statusId": 1
 }
 ```
-
-### Raw prompt here
-
-[https://github.com/thanhtunguet/thanhtunguet.github.io/blob/main/_posts/mobile-development/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md](https://github.com/thanhtunguet/thanhtunguet.github.io/blob/main/_posts/mobile-development/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md)

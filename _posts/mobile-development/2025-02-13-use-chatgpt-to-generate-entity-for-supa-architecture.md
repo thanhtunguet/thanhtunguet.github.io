@@ -229,6 +229,10 @@ Using ChatGPT to generate `supa_architecture` entity classes significantly speed
 
 ---
 
+## Raw prompt here
+
+[https://github.com/thanhtunguet/thanhtunguet.github.io/blob/main/_posts/mobile-development/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md](https://github.com/thanhtunguet/thanhtunguet.github.io/blob/main/_posts/mobile-development/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md)
+
 ### **Further Reading**
 - 📚 [supa_architecture Package Documentation](https://pub.dev/packages/supa_architecture)  
 - 💡 [Best Practices for JSON Serialization in Flutter](https://flutter.dev/docs/development/data-and-backend/json)  
