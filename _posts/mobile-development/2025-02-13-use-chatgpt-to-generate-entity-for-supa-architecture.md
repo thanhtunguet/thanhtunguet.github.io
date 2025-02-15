@@ -231,7 +231,7 @@ Using ChatGPT to generate `supa_architecture` entity classes significantly speed
 
 ## Raw prompt here
 
-[https://raw.githubusercontent.com/thanhtunguet/thanhtunguet.github.io/refs/heads/main/_posts/mobile-development/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md](https://raw.githubusercontent.com/thanhtunguet/thanhtunguet.github.io/refs/heads/main/_posts/mobile-development/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md)
+[https://raw.githubusercontent.com/thanhtunguet/thanhtunguet.github.io/refs/heads/main/prompts/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md](https://raw.githubusercontent.com/thanhtunguet/thanhtunguet.github.io/refs/heads/main/prompts/2025-02-13-use-chatgpt-to-generate-entity-for-supa-architecture_raw_prompt.md)
 
 ### **Further Reading**
 - 📚 [supa_architecture Package Documentation](https://pub.dev/packages/supa_architecture)  
