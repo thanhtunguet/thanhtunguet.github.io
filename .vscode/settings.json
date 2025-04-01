@@ -5,7 +5,7 @@
     "*.html": "liquid"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    "editor.defaultFormatter": "fcrespo82.markdown-table-formatter"
   },
   "[html][liquid]": {
     "editor.defaultFormatter": "Shopify.theme-check-vscode"
