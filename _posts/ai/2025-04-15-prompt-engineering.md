@@ -1,12 +1,10 @@
 ---
-title: Prompt Engineering: Crafting Effective Instructions for AI Models
-date: 2025-04-16 07:50:00 +0700
+title: "Prompt Engineering: Crafting Effective Instructions for AI Models"
+date: 2025-04-15 07:50:00 +0700
 categories: [AI, Prompt Engineering]
 tags: [AI, LLM, Prompt Engineering]
 pin: false
 ---
-
-# Prompt Engineering: Crafting Effective Instructions for AI Models
 
 ## What Is Prompt Engineering and Why It Matters
 
