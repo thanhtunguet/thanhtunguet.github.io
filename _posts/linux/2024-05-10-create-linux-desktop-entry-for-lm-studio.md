@@ -30,3 +30,7 @@ sudo chmod +x /usr/local/bin/lmstudio.desktop
 ```
 
 Once you've created the file and set the permissions, LM Studio should appear in your desktop environment's application menu.
+
+Also, here is LM Studio icon:
+
+![lmstudio.webp](/assets/img/lmstudio.webp)
