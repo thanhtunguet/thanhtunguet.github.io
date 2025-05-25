@@ -1,188 +1,113 @@
 ---
-title: Handling Permissions in React Native
+title: "Mastering Permissions in React Native with react-native-permissions"
 date: 2022-10-29 19:10:00 +0700
 categories: ["Mobile Development", "React Native"]
-tags: ["Mobile Development", "React Native", "Libraries"]
+tags: ["Mobile Development", "React Native", "Permissions", "Libraries"]
 pin: false
 ---
 
-`react-native-permissions` is a very popular library for managing permissions in the React Native world.
-It provides a specific guide on the permission handling flow in the application as follows:
+# Mastering Permissions in React Native with react-native-permissions
 
-### iOS flow
+Managing permissions is a critical aspect of mobile app development. The `react-native-permissions` library simplifies this process, providing a unified API for handling permissions across iOS and Android. This guide explores how to use the library effectively.
 
-```
-   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-   ┃ check(PERMISSIONS.IOS.CAMERA) ┃
-   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-                   │
-       Is the feature available
-           on this device ?
-                   │           ╔════╗
-                   ├───────────║ NO ║──────────────┐
-                   │           ╚════╝              │
-                ╔═════╗                            ▼
-                ║ YES ║                 ┌─────────────────────┐
-                ╚═════╝                 │ RESULTS.UNAVAILABLE │
-                   │                    └─────────────────────┘
-           Is the permission
-             requestable ?
-                   │           ╔════╗
-                   ├───────────║ NO ║──────────────┐
-                   │           ╚════╝              │
-                ╔═════╗                            ▼
-                ║ YES ║                  ┌───────────────────┐
-                ╚═════╝                  │ RESULTS.BLOCKED / │
-                   │                     │ RESULTS.LIMITED / │
-                   │                     │  RESULTS.GRANTED  │
-                   ▼                     └───────────────────┘
-          ┌────────────────┐
-          │ RESULTS.DENIED │
-          └────────────────┘
-                   │
-                   ▼
-  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-  ┃ request(PERMISSIONS.IOS.CAMERA) ┃
-  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-                   │
-         Does the user accept
-            the request ?
-                   │           ╔════╗
-                   ├───────────║ NO ║──────────────┐
-                   │           ╚════╝              │
-                ╔═════╗                            ▼
-                ║ YES ║                   ┌─────────────────┐
-                ╚═════╝                   │ RESULTS.BLOCKED │
-                   │                      └─────────────────┘
-                   ▼
-          ┌─────────────────┐
-          │ RESULTS.GRANTED │
-          └─────────────────┘
+## Why Use react-native-permissions?
+
+Permissions are essential for accessing device features like the camera, location, and microphone. However, handling permissions can be complex due to platform-specific differences. The `react-native-permissions` library offers:
+
+- A consistent API for iOS and Android.
+- Support for a wide range of permissions.
+- Easy integration with your React Native app.
+
+## Installation
+
+Install the library using npm or yarn:
+
+```bash
+npm install react-native-permissions
 ```
 
-### Android flow
+Link the library (for React Native versions below 0.60):
 
-```
- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
- ┃ check(PERMISSIONS.ANDROID.CAMERA) ┃
- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-                   │
-       Is the feature available
-           on this device ?
-                   │           ╔════╗
-                   ├───────────║ NO ║──────────────┐
-                   │           ╚════╝              │
-                ╔═════╗                            ▼
-                ║ YES ║                 ┌─────────────────────┐
-                ╚═════╝                 │ RESULTS.UNAVAILABLE │
-                   │                    └─────────────────────┘
-           Is the permission
-           already granted ?
-                   │           ╔═════╗
-                   ├───────────║ YES ║─────────────┐
-                   │           ╚═════╝             │
-                ╔════╗                             ▼
-                ║ NO ║                   ┌───────────────────┐
-                ╚════╝                   │  RESULTS.GRANTED  │
-                   │                     └───────────────────┘
-                   ▼
-          ┌────────────────┐
-          │ RESULTS.DENIED │◀──────────────────────┐
-          └────────────────┘                       │
-                   │                               │
-                   ▼                               │
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓         ╔═════╗
-┃ request(PERMISSIONS.ANDROID.CAMERA) ┃         ║ YES ║
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛         ╚═════╝
-                   │                               │
-         Does the user accept                      │
-            the request ?                          │
-                   │           ╔════╗      Is the permission
-                   ├───────────║ NO ║──── still requestable ?
-                   │           ╚════╝              │
-                ╔═════╗                         ╔════╗
-                ║ YES ║                         ║ NO ║
-                ╚═════╝                         ╚════╝
-                   │                               │
-                   ▼                               ▼
-          ┌─────────────────┐             ┌─────────────────┐
-          │ RESULTS.GRANTED │             │ RESULTS.BLOCKED │
-          └─────────────────┘             └─────────────────┘
+```bash
+react-native link react-native-permissions
 ```
 
-### Windows flow
+For React Native 0.60 and above, autolinking is supported.
 
-```
-   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-   ┃ check(PERMISSIONS.WINDOWS.WEBCAM) ┃
-   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-                     │
-         Is the feature available
-              on this device ?
-                     │           ╔════╗
-                     ├───────────║ NO ║──────────────┐
-                     │           ╚════╝              │
-                  ╔═════╗                            ▼
-                  ║ YES ║                 ┌─────────────────────┐
-                  ╚═════╝                 │ RESULTS.UNAVAILABLE │
-                     │                    └─────────────────────┘
-             Is the permission
-               requestable ?
-                     │           ╔════╗
-                     ├───────────║ NO ║──────────────┐
-                     │           ╚════╝              │
-                  ╔═════╗                            ▼
-                  ║ YES ║                  ┌───────────────────┐
-                  ╚═════╝                  │ RESULTS.BLOCKED / │
-                     │                     │  RESULTS.GRANTED  │
-                     ▼                     └───────────────────┘
-            ┌────────────────┐
-            │ RESULTS.DENIED │
-            └────────────────┘
-                     │
-                     ▼
-  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-  ┃ request(PERMISSIONS.WINDOWS.WEBCAM) ┃
-  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-                     │
-           Does the user accept
-              the request ?
-                     │           ╔════╗
-                     ├───────────║ NO ║──────────────┐
-                     │           ╚════╝              │
-                  ╔═════╗                            ▼
-                  ║ YES ║                   ┌─────────────────┐
-                  ╚═════╝                   │ RESULTS.BLOCKED │
-                     │                      └─────────────────┘
-                     ▼
-            ┌─────────────────┐
-            │ RESULTS.GRANTED │
-            └─────────────────┘
-```
+## Handling Permissions
 
-So the question is: how do we implement it in code?
+### iOS Permissions Flow
 
-Basically, we will need to handle the following cases:
+The library provides a clear flow for handling permissions on iOS:
 
-- Request permission in a component
-- Request permission when an event occurs (users touched the button, ...)
+1. **Check Permission**: Use `check` to determine the current status of a permission.
 
-For each type of permission, we will need 3 methods as follows:
+   ```javascript
+   import { check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
-- `usePermission`: hook used in a component or custom hook
-- `checkPermission`: check permission
-- `requestPermission`: request permission
+   check(PERMISSIONS.IOS.CAMERA)
+     .then((result) => {
+       switch (result) {
+         case RESULTS.UNAVAILABLE:
+           console.log('This feature is not available on this device.');
+           break;
+         case RESULTS.DENIED:
+           console.log('The permission has not been requested or is denied.');
+           break;
+         case RESULTS.GRANTED:
+           console.log('The permission is granted.');
+           break;
+         case RESULTS.BLOCKED:
+           console.log('The permission is blocked.');
+           break;
+       }
+     })
+     .catch((error) => {
+       console.error(error);
+     });
+   ```
 
-We write it as an abstract class as follows:
+2. **Request Permission**: If the permission is denied, request it using `request`.
+
+   ```javascript
+   import { request } from 'react-native-permissions';
+
+   request(PERMISSIONS.IOS.CAMERA)
+     .then((result) => {
+       console.log(result);
+     });
+   ```
+
+### Android Permissions Flow
+
+The process is similar for Android, but you need to handle additional cases like `RESULTS.LIMITED`.
+
+## Best Practices
+
+- Always check the permission status before requesting it.
+- Provide clear explanations to users about why a permission is needed.
+- Handle edge cases, such as permissions being blocked.
+
+## Conclusion
+
+The `react-native-permissions` library is a powerful tool for managing permissions in React Native apps. By following the best practices outlined in this guide, you can ensure a smooth user experience while maintaining compliance with platform guidelines.
+
+## Example: Implementing Permission Handling in Code
+
+To implement permission handling in your code, you can create an abstract class for permission services and extend it for specific permissions. Here's how:
+
+### Abstract Permission Service
 
 ```typescript
+import { check, request, Permission, PermissionStatus } from 'react-native-permissions';
+
 export function usePermission(this: AbstractPermissionService) {
   React.useEffect(() => {
     this.checkPermission();
   }, []);
 }
 
-export abstract class AbstractPermissionService extends Service {
+export abstract class AbstractPermissionService {
   public readonly usePermission = usePermission;
 
   abstract get permission(): Permission;
@@ -236,39 +161,54 @@ export abstract class AbstractPermissionService extends Service {
 }
 ```
 
-For each permission, create a separate class to handle the permission, inheriting from `AbstractPermissionService` and implementing the corresponding methods and getter.
-
-## Example:
-
-### Location permission
+### Location Permission Service Example
 
 ```typescript
-export class GeolocationService extends AbstractGeolocationService {
+import { Platform } from 'react-native';
+import { PERMISSIONS } from 'react-native-permissions';
+import { AbstractPermissionService } from './AbstractPermissionService';
+
+export class GeolocationService extends AbstractPermissionService {
   public get permission(): Permission {
     return Platform.select({
       android: PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
       ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
     })!;
   }
+
+  // Implement the abstract methods for handling permission states
 }
 ```
 
-### Camera permission
+### Camera Permission Service Example
 
 ```typescript
-export class CameraService extends AbstractGeolocationService {
+import { Platform } from 'react-native';
+import { PERMISSIONS } from 'react-native-permissions';
+import { AbstractPermissionService } from './AbstractPermissionService';
+
+export class CameraService extends AbstractPermissionService {
   public get permission(): Permission {
     return Platform.select({
       android: PERMISSIONS.ANDROID.CAMERA,
       ios: PERMISSIONS.IOS.CAMERA,
     })!;
   }
+
+  // Implement the abstract methods for handling permission states
 }
 ```
 
-## Usage in a component
+## Usage in a Component
+
+To use the permission services in your components:
 
 ```typescript
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { cameraService } from './services/CameraService';
+import { geolocationService } from './services/GeolocationService';
+
 function ExampleComponent() {
   // call usePermission inside component
   cameraService.usePermission();
@@ -282,6 +222,13 @@ function ExampleComponent() {
     });
   }, []);
 
-  // ...
+  return (
+    <View>
+      <Text>React Native Permissions Example</Text>
+      <Button title="Check Location Permission" onPress={handleLocation} />
+    </View>
+  );
 }
 ```
+
+By structuring your permission handling this way, you create a scalable and maintainable codebase that adheres to best practices for React Native development.

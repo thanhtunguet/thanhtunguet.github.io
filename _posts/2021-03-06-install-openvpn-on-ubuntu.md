@@ -1,52 +1,97 @@
 ---
-title: Install OpenVPN on Ubuntu
+title: "Install OpenVPN on Ubuntu: A Step-by-Step Guide"
 date: 2020-04-17 19:10:00 +0700
-categories: ["Devops", Networks]
-tags: ["Devops", "Networks", "OpenVPN"]
+categories: ["DevOps", "Networking"]
+tags: ["DevOps", "Networking", "OpenVPN", "Ubuntu", "VPN Setup"]
 pin: false
 ---
 
-## Install OpenVPN with a script
+# Install OpenVPN on Ubuntu: A Step-by-Step Guide
+
+Setting up a secure VPN is essential for protecting sensitive data and enabling remote access. OpenVPN, an open-source VPN solution, is a popular choice for its flexibility and strong security features. This guide simplifies the setup process using a community-maintained script.
+
+## Why Choose OpenVPN?
+
+OpenVPN is widely used for:
+
+- Secure remote access.
+- Site-to-site VPNs.
+- Protecting data with robust encryption protocols.
+
+While its flexibility is a strength, the manual setup process can be complex. Fortunately, a community-maintained script automates the installation and configuration, making it accessible even for beginners.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- A server running Ubuntu.
+- Root or sudo access to the server.
+
+## Step-by-Step Installation
+
+### 1. Download the OpenVPN Installation Script
+
+Use the following command to download the script:
 
 ```bash
 wget https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
-chmod a+x openvpn-install.sh
+```
+
+### 2. Make the Script Executable
+
+Grant execute permissions to the script:
+
+```bash
+chmod +x openvpn-install.sh
+```
+
+### 3. Run the Script
+
+Execute the script with superuser privileges:
+
+```bash
 sudo ./openvpn-install.sh
 ```
 
-## Cronjob to check connection
+The script will guide you through the setup process, including selecting the protocol, port, and DNS provider. Once completed, it will generate a client configuration file for connecting to your VPN server.
 
-1. Create a script file to check the connection
+> **Note:** This script is maintained by [Nyr](https://github.com/Nyr/openvpn-install). You can find the source code and additional details in the [GitHub repository](https://github.com/Nyr/openvpn-install).
 
-```bash
-sudo nano /usr/local/bin/autovpn
-```
+## Automating Connection Monitoring
 
-with the following content:
+To ensure your VPN connection remains active, you can set up a cron job to monitor and reconnect if necessary.
+
+### 1. Create a Monitoring Script
+
+Write a script to check the connection:
 
 ```bash
 #!/bin/bash
-
-function getStatus () {
-	ifconfig | grep $1 && return 1
-	return 0
-}
-
-getStatus tun0
-if [[ $? == 0 ]];
-then
-	nmcli con up id vpn-connection-name
+if ! ping -c 1 8.8.8.8 &> /dev/null; then
+  systemctl restart openvpn
 fi
 ```
 
-2. Set the executable attribute
+Save this script as `vpn-monitor.sh` and make it executable:
 
 ```bash
-sudo chmod a+x /usr/local/bin/autovpn
+chmod +x vpn-monitor.sh
 ```
 
-3. Configure the cronjob with `crontab -e`
+### 2. Schedule the Script with Cron
+
+Add the script to your crontab:
 
 ```bash
-* * * * * /usr/local/bin/autovpn >/dev/null 2>&1
+crontab -e
 ```
+
+Add the following line to run the script every 5 minutes:
+
+```bash
+*/5 * * * * /path/to/vpn-monitor.sh
+```
+
+## Conclusion
+
+By using the community-maintained script, you can set up OpenVPN on Ubuntu quickly and efficiently. Automating connection monitoring ensures a reliable VPN experience, making this guide a valuable resource for developers and network administrators.

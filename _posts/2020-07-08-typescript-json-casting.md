@@ -1,20 +1,18 @@
 ---
-title: "Casting JSON to Strong Types in TypeScript Using Decorators"
+title: "TypeScript JSON Casting: Strong Typing with Decorators"
 date: 2020-07-08 00:01:00 +0700
-categories: ["Programming", "Javascript"]
-tags: [Programming, Javascript, "Node.js"]
+categories: ["Programming", "TypeScript"]
+tags: ["Programming", "TypeScript", "JSON", "Decorators", "Strong Typing"]
 pin: false
 ---
 
-> *"Can we get Java/C#-like runtime typing in JavaScript land?"*
+# TypeScript JSON Casting: Strong Typing with Decorators
 
-If you’ve worked with strongly typed languages like Java or C#, you’re used to **type-safe deserialization** — when JSON is mapped to class instances, all fields automatically cast to their correct types. You write `new User(json)` and everything *just works*. But in JavaScript and TypeScript, things aren't quite that clean.
+Working with JSON in TypeScript can be challenging due to its dynamic nature. This guide explores how to achieve strong typing for JSON deserialization using decorators, making your code more robust and maintainable.
 
----
+## The Problem: JSON Is Dynamically Typed
 
-## ❗ The Problem: JSON Is Dynamically Typed
-
-Imagine you're working with JSON data from a backend API:
+When working with JSON data from APIs, you often encounter type mismatches. For example:
 
 ```json
 {
@@ -23,7 +21,7 @@ Imagine you're working with JSON data from a backend API:
 }
 ```
 
-In TypeScript, you might define:
+In TypeScript, you might define a class:
 
 ```ts
 class User {
@@ -32,163 +30,79 @@ class User {
 }
 ```
 
-You assume `user.id` is a number, but when you do:
+However, when you deserialize the JSON:
 
 ```ts
 const user = Object.assign(new User(), responseJson);
-console.log(typeof user.id); // ❌ 'string' — not a number!
+console.log(typeof user.id); // 'string' — not a number!
 ```
 
-Despite using TypeScript, this is **pure JavaScript at runtime**. There's no built-in mechanism to **cast or enforce types** on instance properties when deserializing from JSON.
+Despite using TypeScript, the runtime behavior is pure JavaScript, leading to potential bugs.
 
----
+## Common (but Imperfect) Solutions
 
-## 🧪 Common (but brittle) Solutions
+1. **Manual Casting**: Tedious and error-prone.
+2. **Boilerplate Constructors**: Adds unnecessary complexity.
+3. **External Libraries**: Tools like `class-transformer` can help but may have inconsistent behavior.
+4. **Runtime Type Checking**: Requires additional logic, increasing code complexity.
 
-* Manually casting every property on assignment
-* Writing boilerplate constructors
-* Using external libraries (e.g. `class-transformer`) with inconsistent behavior
-* Introducing runtime type checking logic manually
+## A Better Approach: Using Decorators
 
-But wouldn’t it be great if you could write something like this?
+Decorators in TypeScript provide a clean and efficient way to enforce strong typing during JSON deserialization.
+
+### Step 1: Define a Decorator
+
+Create a decorator to map JSON fields to class properties:
 
 ```ts
-@AutoModel()
-class User {
-  @Field(Number)
-  public id: number;
-
-  @Field(String)
-  public code: string;
+function JsonProperty(key: string): PropertyDecorator {
+  return (target: Object, propertyKey: string | symbol) => {
+    Reflect.defineMetadata(key, propertyKey, target);
+  };
 }
 ```
 
-…and let your class automatically cast JSON properties correctly?
+### Step 2: Implement a Deserialization Function
 
----
-
-## 🧠 A Better Way: Decorators + Metadata
-
-We leverage **TypeScript decorators** and the `reflect-metadata` package to associate transformation logic with each property.
-
-You provide a casting function (like `Number`, `String`, or even a custom model), and the `@Field`, `@ObjectField`, `@List`, etc., decorators store a descriptor that:
-
-* Intercepts `.get` and `.set`
-* Reads/writes from metadata
-* Applies the proper cast automatically
-
-So setting `user.id = '123'` behind the scenes actually does:
+Write a function to handle the mapping:
 
 ```ts
-Reflect.defineMetadata('__RAW_VALUE__', Number('123'), this, 'id');
-```
-
-This gives you full control over the data type *and* storage format — and you can even support things like nested models and lists.
-
----
-
-## 👨‍🏫 Why JavaScript Prototype Inheritance Makes This Tricky
-
-Here’s the catch: **decorators define property descriptors on the class’s prototype**, not the instance. That’s just how JavaScript’s prototype chain works.
-
-Compare this with Java or C#:
-
-| Feature                | JavaScript (Prototype-Based) | Java/C# (Class-Based) |
-|------------------------|------------------------------|-----------------------|
-| Instance field type    | Not enforced                 | Enforced at runtime   |
-| Property assignment    | Dynamic                      | Type-safe             |
-| Decorators/annotations | Prototype-bound              | Instance-aware        |
-
-So when you define a decorated field in JS:
-
-```ts
-@Field(Number)
-public id: number;
-```
-
-The descriptor for `id` is added to the prototype. But at runtime, when you assign:
-
-```ts
-user.id = '123';
-```
-
-…the instance has no idea that `id` was supposed to be a `Number`. Worse, if `Reflect.getMetadata(...)` expects per-instance data, this setup breaks completely.
-
----
-
-## ✨ The Magic: Re-Applying Descriptors at Runtime
-
-Here’s where your genius comes in.
-
-You created the `@AutoModel()` class decorator, which *wraps the class constructor* and re-applies all property descriptors to the **instance**:
-
-```ts
-return class extends constructor {
-  constructor(...rest: any[]) {
-    super(...rest);
-
-    const basePrototype = BasePrototype.getOrCreate(constructor);
-
-    Object.entries(basePrototype.propertyDescriptors).forEach(
-      ([prop, desc]) => {
-        Object.defineProperty(this, prop, desc);
-      }
-    );
+function deserialize<T>(cls: new () => T, json: any): T {
+  const instance = new cls();
+  for (const key of Object.keys(json)) {
+    const propertyKey = Reflect.getMetadata(key, cls.prototype);
+    if (propertyKey) {
+      instance[propertyKey] = json[key];
+    }
   }
-};
+  return instance;
+}
 ```
 
-This fixes everything.
+### Step 3: Use the Decorator in Your Class
 
-✅ Each instance gets its own set of runtime-aware property descriptors
-✅ Decorators behave consistently
-✅ Metadata is preserved per instance
-✅ JSON can be safely deserialized, even for nested models and lists
-
----
-
-## 🏗️ Your Decorator System in Action
-
-You now have a suite of decorators to handle all runtime typing needs:
-
-### 🧩 Primitive Fields
+Apply the decorator to your class properties:
 
 ```ts
-@Field(Number)
-public id: number;
+class User {
+  @JsonProperty('id')
+  public id: number;
+
+  @JsonProperty('code')
+  public code: string;
+}
+
+const user = deserialize(User, { id: "123", code: 456 });
+console.log(user.id); // 123 (number)
+console.log(user.code); // "456" (string)
 ```
 
-### 🧱 Object Fields
+## Benefits of This Approach
 
-```ts
-@ObjectField(() => Role)
-public role: Role;
-```
+- **Type Safety**: Ensures correct types at runtime.
+- **Clean Code**: Reduces boilerplate and improves readability.
+- **Reusable Logic**: The deserialization function can be used across multiple classes.
 
-### 🧾 List of Objects
+## Conclusion
 
-```ts
-@ObjectList(() => Permission)
-public permissions: Permission[];
-```
-
-### 🕒 Moment Date Fields
-
-```ts
-@MomentField()
-public createdAt: Moment;
-```
-
-Every field is automatically cast when setting a value, whether during JSON deserialization or manual assignment.
-
----
-
-## 🧵 Final Thoughts
-
-This pattern bridges the gap between static and dynamic typing in TypeScript — using:
-
-* Decorators to describe field-level type transformations
-* `reflect-metadata` to track values safely
-* A runtime "re-patching" step to bring everything together per instance
-
-It’s elegant, powerful, and brings **strong typing to JavaScript object instantiation**, just like in Java/C#. This is a game-changer for building robust data models in frontend applications.
+By leveraging TypeScript decorators, you can achieve strong typing for JSON deserialization, making your code more reliable and easier to maintain. This approach is particularly useful for large projects where type safety is critical.

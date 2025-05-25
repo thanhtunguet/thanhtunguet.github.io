@@ -1,35 +1,35 @@
 ---
-title: How to Move a Git Repository with Multiple Branches to a New Server
+title: "Effortlessly Migrate Git Repositories with Multiple Branches"
 date: 2019-11-16 19:10:00 +0700
-categories: [Devops, Git]
-tags: [Devops, Git, Tools, "Scripts"]
+categories: ["DevOps", "Git"]
+tags: ["DevOps", "Git", "Tools", "Scripts", "Repository Migration"]
 pin: false
 ---
 
-# Introduction
+# Effortlessly Migrate Git Repositories with Multiple Branches
 
-You want to move a repository to a new git server, but your repo has too many branches to move them one by one.
+Migrating a Git repository to a new server can be daunting, especially when dealing with multiple branches. This guide simplifies the process with a step-by-step approach and a handy script to automate the migration.
 
-# Solution
+## Why Automate Git Repository Migration?
 
-We will use a simple bash script to get the list of branches from the original repo's remote (`origin`) and push them to the new repo's remote (`dest`).
+Manually migrating branches one by one is time-consuming and error-prone. By automating the process, you can:
 
-## Syntax
+- Save time and effort.
+- Ensure all branches are migrated accurately.
+- Minimize downtime during the migration.
 
-First, let's define the syntax for our script:
+## Prerequisites
 
-```bash
-./sync.sh path-to-directory origin dest
-```
+Before you begin, ensure you have:
 
-In this script:
+- Access to both the source and destination Git servers.
+- A local clone of the repository you want to migrate.
 
-- `origin` and `dest` are the two remotes set in the local repo you cloned.
-- `path-to-directory` is the relative path to the directory containing your local repo.
+## Step-by-Step Guide
 
-## Step 1: Clone the Original Repo
+### 1. Clone the Original Repository
 
-Clone the original repo:
+Start by cloning the repository from the source server:
 
 ```bash
 git clone git://path-to-your-repo
@@ -37,81 +37,53 @@ cd your-repo
 git fetch --all
 ```
 
-## Step 2: Add the New Repo Remote
+### 2. Add the Destination Remote
 
-Add the URL of the new repo to your local repo:
+Add the URL of the new repository as a remote:
 
 ```bash
 git remote add dest git://path-to-your-remote-dest
 ```
 
-## Step 3: Get the List of Branches
+### 3. List and Push Branches
 
-Get the list of branch names from the original remote. We need to remove the remote part from the branch name, e.g., `origin/master` becomes `master`:
-
-```bash
-git branch -r | grep -v '\->' | grep 'origin/' | sed "s/origin\///g"
-```
-
-## Step 4: Sync the Branches
-
-Sync all branches using a while loop:
-
-```bash
-function sync {
-  while read line
-  do
-    writeHR;
-    echo "Checking out $line";
-    git checkout $line;
-    git pull origin $line;
-    git pull dest $line;
-    git push dest $line;
-  done;
-}
-```
-
-## Complete Script
-
-Combining the steps above, we have the complete script:
+Use the following script to list all branches from the source remote (`origin`) and push them to the destination remote (`dest`):
 
 ```bash
 #!/bin/bash
+# sync.sh: Migrate all branches from origin to dest
 
-function writeHR {
-  echo '---------------------'
-}
+if [ "$#" -ne 3 ]; then
+  echo "Usage: $0 path-to-directory origin dest"
+  exit 1
+fi
 
-function sync {
-  while read line
-  do
-    writeHR;
-    echo "Checking out $line";
-    git checkout $line;
-    git pull $src $line;
-    git pull $dest $line;
-    git push $dest $line;
-  done;
-}
-
-cd $1;
-echo "You are currently on `realpath .`"
-
-src="$2";
-dest="$3";
-
-echo "Fetching remote: $src";
-git fetch $src;
-echo "Fetching remote: $dest";
-git fetch $dest;
-
-git branch -r | grep -v '\->' | grep $src/ | sed "s/$src\///g" | sync
+cd "$1" || exit
+for branch in $(git branch -r | grep "$2/" | sed "s|$2/||"); do
+  git push "$3" "$branch:$branch"
+done
 ```
 
-Here, we use `$src` and `$dest` as the names of the two remotes. These variables are passed into the script when it's called:
+Save this script as `sync.sh` and make it executable:
 
 ```bash
-./sync.sh path-to-directory src-remote dest-remote
+chmod +x sync.sh
 ```
 
-You can find this script on Gist: [https://gist.github.com/thanhtunguet/bac5a6b6fc21a6b0ada66cc7fee1e776](https://gist.github.com/thanhtunguet/bac5a6b6fc21a6b0ada66cc7fee1e776)
+Run the script:
+
+```bash
+./sync.sh path-to-directory origin dest
+```
+
+### 4. Verify the Migration
+
+After the script completes, verify that all branches have been migrated:
+
+```bash
+git branch -r
+```
+
+## Conclusion
+
+By following this guide, you can migrate Git repositories with multiple branches quickly and efficiently. Automating the process ensures accuracy and saves valuable time, making it an essential skill for DevOps professionals.

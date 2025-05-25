@@ -1,133 +1,102 @@
 ---
-title: Android - Splash screen the right way
+title: "Android Splash Screen: Best Practices for 2025"
 date: 2017-04-11 19:10:00 +0700
 categories: ["Mobile Development", "Android"]
-tags: ["Mobile Development", "Android"]
+tags: ["Mobile Development", "Android", "Best Practices", "UI/UX"]
 pin: false
 ---
 
-# How to use a Splash screen correctly
+# Android Splash Screen: Best Practices for 2025
 
-Well, there are a lot of blog tutorials teaching how to create a splash screen like this:
+Splash screens are a common feature in mobile apps, but they are often implemented poorly, leading to a frustrating user experience. In this guide, we will explore the right way to create a splash screen that enhances your app's usability and aligns with Google's Material Design guidelines.
+
+## Why Avoid Traditional Splash Screens?
+
+Many tutorials suggest implementing splash screens with a delay, like this:
 
 ```java
 public class SplashActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        ...
-
         new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(this, MainActivity.class));
-                    }
-                }, 3000);
+            @Override
+            public void run() {
+                startActivity(new Intent(this, MainActivity.class));
+            }
+        }, 3000);
     }
 }
 ```
 
-The thing is, this is nothing but a 3 seconds waisting of the user's time!
+This approach wastes the user's time and is considered an anti-pattern. Google explicitly advises against such implementations in their [Material Design Documentation](https://material.io/guidelines/patterns/launch-screens.html) and [developer talks](https://www.youtube.com/watch?v=pEGWcMTxs3I&feature=youtu.be&t=1434).
 
-##### As you can notice, Google has gotten their opinion in favor of Splash Screens on their [Official Material Design Documentation](https://material.io/guidelines/patterns/launch-screens.html)
+## The Right Way to Implement a Splash Screen
 
-###### But, is this something you just put anyway on your app to make the user waste his time?
+A well-designed splash screen should:
 
-##### No. And Google advocated against splash screens like this, and even called it an anti-pattern [on this video](https://www.youtube.com/watch?v=pEGWcMTxs3I&feature=youtu.be&t=1434).
+- Display instantly without delays.
+- Serve as a placeholder while the app loads essential resources.
+- Reflect your app's branding and design.
 
-##### So, is there a way to make use of this pattern on the right way? The answer is, Yes!
+### Ingredients for a Proper Splash Screen
 
-## So, how could one do to create a Splash Screen just for the amount of time the App needs to open the Main Activity?
+1. **A dedicated Splash Activity**: This activity should not rely on a layout file.
+2. **Manifest Configuration**: Declare the splash screen as the launcher activity.
+3. **Custom Drawable**: Use a drawable resource to style the splash screen.
 
-##### Well, actually, it's easy. The ingredients are:
+### Step-by-Step Implementation
 
-- An Activity for the Splash Screen (without the layout file)
-- Your Manifest: to declare you Splash Screen as the Launcher
-- One drawable file to customize the splash screen a little
+1. **Create a Splash Activity**
 
-  _The splash view has to be ready immediately, even before you can inflate a layout file in your splash activity._
+   ```java
+   public class SplashActivity extends AppCompatActivity {
+       @Override
+       protected void onCreate(Bundle savedInstanceState) {
+           super.onCreate(savedInstanceState);
+           startActivity(new Intent(this, MainActivity.class));
+           finish();
+       }
+   }
+   ```
 
-## The recipe:
+2. **Update the Manifest**
 
-###### Create your Splash Screen Activity
+   ```xml
+   <activity
+       android:name=".SplashActivity"
+       android:theme="@style/SplashTheme">
+       <intent-filter>
+           <action android:name="android.intent.action.MAIN" />
+           <category android:name="android.intent.category.LAUNCHER" />
+       </intent-filter>
+   </activity>
+   ```
 
+3. **Design the Splash Drawable**
 
-`SplashScreen.java`
+   Create a drawable resource (`res/drawable/splash_background.xml`):
 
+   ```xml
+   <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+       <item android:drawable="@color/primaryColor" />
+       <item>
+           <bitmap
+               android:gravity="center"
+               android:src="@drawable/app_logo" />
+       </item>
+   </layer-list>
+   ```
 
-```java
-public class SplashActivity extends AppCompatActivity {
+4. **Apply the Theme**
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+   Define a theme in `res/values/styles.xml`:
 
-        /** START - this is the purpose of this Activity */
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-        /** END - everything more than this is time consuming */
-    }
-}
-```
+   ```xml
+   <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+       <item name="android:windowBackground">@drawable/splash_background</item>
+   </style>
+   ```
 
+## Conclusion
 
-`activity_splash.xml`
-
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@color/colorGrey"/>
-
-    <item>
-        <bitmap android:gravity="center" android:src="@mipmap/ic_launcher"/>
-    </item>
-
-</layer-list>
-```
-
-
-`Manifest.xml`
-
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.andyfriends.showcase">
-
-    <application
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".activities.SplashActivity"
-            android:label="@string/app_name"
-            android:theme="@style/SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
-    </application>
-
-</manifest>
-```
-
-we've set a different Theme for the SplashActivity, so we can call our drawable resource on it
-
-
-```xml
-<style name="SplashScreen" parent="Theme.AppCompat.NoActionBar">
-    <item name="android:windowBackground">@drawable/activity_splash</item>
-</style>
-```
-
-That is it. You can clone the project using Android Studio and take a look.
-
-Source: [https://github.com/davicoradini/Android-splash-screen-the-right-way](https://github.com/davicoradini/Android-splash-screen-the-right-way)
+By following these steps, you can create a splash screen that is both functional and user-friendly. Avoid unnecessary delays and focus on delivering a seamless experience from the moment your app launches.

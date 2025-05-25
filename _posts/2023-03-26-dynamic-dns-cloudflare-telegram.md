@@ -165,23 +165,26 @@ Now that we've set up the DNS record and Telegram bot, we'll write a complete BA
 #!/bin/bash
 
 # Cloudflare Configuration
-CF_API_KEY="CLOUFLARE_API_KEY"
-CF_EMAIL="your_email@example.com"
-ZONE_ID="ZONE_ID"
-RECORD_ID="RECORD_ID"
-# Telegram Bot Configuration
-BOT_TOKEN="Bot_token"
-CHAT_ID="Your chat id"
-# DNS
-YOUR_DOMAIN="*.example.com"
-DNS_SERVER="8.8.8.8"
+CF_API_KEY="CLOUFLARE_API_KEY"  # Your Cloudflare API key
+CF_EMAIL="your_email@example.com"  # Your Cloudflare account email
+ZONE_ID="ZONE_ID"  # Zone ID for your domain
+RECORD_ID="RECORD_ID"  # Record ID for the DNS entry
 
-# Send a message to a specific Telegram account
+# Telegram Bot Configuration
+BOT_TOKEN="Bot_token"  # Telegram bot token
+CHAT_ID="Your chat id"  # Telegram chat ID for notifications
+
+# DNS Configuration
+YOUR_DOMAIN="*.example.com"  # Your domain or subdomain
+DNS_SERVER="8.8.8.8"  # DNS server to resolve the domain
+
+# Function to send a message via Telegram
 function sendChat() {
     curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
          -d "chat_id=${CHAT_ID}" \
-        -d "text=$1"
+         -d "text=$1"
 }
+
 # Function to call Cloudflare API
 function cloudflare() {
   if [ -z "$CF_EMAIL" ]; then
@@ -202,18 +205,19 @@ function cloudflare() {
 
 # Get current public IP address of your network
 PUBLIC_IP=$(curl -s https://checkip.amazonaws.com)
+
 # Get current DNS setting of your domain
 CURRENT_IP=$(nslookup "${YOUR_DOMAIN}" ${DNS_SERVER} | awk '/^Address: / { print $2 }')
 
-# Compare 2 IP addresses
+# Compare the two IP addresses
 if [ "$CURRENT_IP" != "$PUBLIC_IP" ]; then
-    # If your IP address has changed
+    # If the IP address has changed, update DNS and send a notification
     sendChat "The public IP address has changed from: ${CURRENT_IP} to ${PUBLIC_IP}. DNS setting has been updated!"
     cloudflare -X PUT \
       "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records/${RECORD_ID}" \
       --data "{\"type\":\"A\",\"name\":\"*\",\"content\":\"${PUBLIC_IP}\",\"ttl\":1,\"proxied\":false}"
 else
-    # If the setting is up to date, do nothing
+    # If the DNS setting is up to date, do nothing
     echo "Current DNS setting is up to date"
 fi
 ```

@@ -1,119 +1,104 @@
 ---
-title: Delete offline agents from a pool on Azure Devops Server
+title: Automating the Cleanup of Offline Agents in Azure DevOps
 date: 2023-04-15 10:10:00 +0700
-categories: [Devops, Azure Devops]
-tags: [Devops, Azure Devops, Scripts]
+categories: [DevOps, Azure DevOps]
+tags: [DevOps, Azure DevOps, Automation, Scripts]
 pin: false
 ---
 
-# Prerequisites
+Managing agent pools in Azure DevOps is crucial for maintaining an efficient CI/CD pipeline. Offline agents can clutter your pool and cause unnecessary delays. This guide provides a script to automate the cleanup of offline agents.
 
-Before getting started, make sure you have the following:
+## Prerequisites
 
-- An Azure DevOps organization URL
-- A Personal Access Token (PAT) with permission to manage agents
-- A working Bash environment
+Ensure you have:
 
-## Step 1: Set the Azure DevOps organization URL and PAT token
+- **Azure DevOps Organization URL**: The URL of your Azure DevOps instance.
+- **Personal Access Token (PAT)**: A PAT with permissions to manage agents.
+- **Bash Environment**: A working Bash shell with `curl` and `jq` installed.
 
-Open your preferred text editor and create a new Bash script. At the top of the script, set the `ORG_URL` variable to your Azure DevOps organization URL and the `PAT_TOKEN` variable to your PAT.
+## Step-by-Step Guide
+
+### Step 1: Configure the Script
+
+Create a Bash script and configure the following variables:
 
 ```bash
 #!/usr/bin/env bash
 
-# Set your Azure DevOps organization URL and PAT token
+# Azure DevOps Configuration
 ORG_URL="https://devops-server.example.com/DefaultCollection"
 PAT_TOKEN="<PAT_TOKEN>"
-```
+POOL_ID="$1"  # Pass the agent pool ID as an argument
+API_VERSION="6.0"
 
-# Step 2: Encode the PAT token
-
-To use the PAT token for authentication, we need to encode it as base64. We can do this using the base64 command.
-
-```bash
-# Encode the PAT token as base64 for use in the Authorization header
+# Encode the PAT token
 PAT_TOKEN=$(printf "%s"":$PAT_TOKEN" | base64)
 ```
 
-# Step 3: Set the agent pool ID and API version
+### Step 2: Retrieve Agents in the Pool
 
-The script takes the agent pool ID as an argument when it is run. We can set the pool ID and API version as variables.
+Use the following command to fetch all agents in the specified pool:
 
 ```bash
-# Set the agent pool ID and API version
-POOL_ID="$1"
-API_VERSION="6.0"
+AGENTS=$(curl -s -H "Authorization: Basic $PAT_TOKEN" \
+    "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents?api-version=${API_VERSION}")
 ```
 
-## Step 4: Retrieve a list of all agents in the pool
+### Step 3: Delete Offline Agents
 
-We can use the curl command to retrieve a list of all agents in the specified pool. We pass the PAT token and API version as headers and store the result in the AGENTS variable.
-
-```bash
-# Get a list of all agents in the pool
-AGENTS=$(curl -s -H "Authorization: Basic $PAT_TOKEN" "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents?api-version=${API_VERSION}")
-```
-
-## Step 5: Loop through each agent and delete the offline agents
-
-We can use the jq command to loop through each agent in the retrieved list and retrieve its status. If an agent's status is "offline," we can send a `DELETE` request to the API to delete the agent from the pool.
+Loop through the agents and delete those with a status of "offline":
 
 ```bash
-# Loop through each agent and delete the offline agents
-for AGENT in $(echo $AGENTS | jq -r '.value[].id')
-do
-  STATUS=$(echo $AGENTS | jq -r --arg AGENTID "$AGENT" '.value[] | select(.id == ($AGENTID | tonumber)) | .status')
+for AGENT in $(echo $AGENTS | jq -r '.value[].id'); do
+  STATUS=$(echo $AGENTS | jq -r --arg AGENTID "$AGENT" \
+    '.value[] | select(.id == ($AGENTID | tonumber)) | .status')
 
-  if [ "$STATUS" == "offline" ]
-  then
+  if [ "$STATUS" == "offline" ]; then
     echo "Deleting agent with ID $AGENT"
-    curl -s -X DELETE -H "Authorization: Basic $PAT_TOKEN" "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents/${AGENT}?api-version=${API_VERSION}"
+    curl -s -X DELETE -H "Authorization: Basic $PAT_TOKEN" \
+        "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents/${AGENT}?api-version=${API_VERSION}"
   fi
 done
 ```
 
-## Step 6: Run the script
+### Step 4: Run the Script
 
-Save the script with a descriptive name, such as `azure-devops-delete-offline-agents.sh`. Make the script executable using the chmod command.
-
-```bash
-chmod +x azure-devops-delete-offline-agents.sh
-```
-
-To run the script, pass the agent pool ID as an argument.
+Save the script as `delete-offline-agents.sh`, make it executable, and run it:
 
 ```bash
-./azure-devops-delete-offline-agents.sh <pool_id>
+chmod +x delete-offline-agents.sh
+./delete-offline-agents.sh <pool_id>
 ```
 
 ## Full Script
 
-Here's the complete script with all the steps combined.
-
 ```bash
 #!/usr/bin/env bash
 
-# Set your Azure DevOps organization URL and PAT token
+# Azure DevOps Configuration
 ORG_URL="https://devops-server.example.com/DefaultCollection"
 PAT_TOKEN="<PAT_TOKEN>"
 PAT_TOKEN=$(printf "%s"":$PAT_TOKEN" | base64)
-
-# Set the agent pool ID and API version
 POOL_ID="$1"
 API_VERSION="6.0"
 
-# Get a list of all agents in the pool
-AGENTS=$(curl -s -H "Authorization: Basic $PAT_TOKEN" "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents?api-version=${API_VERSION}")
+# Fetch agents
+AGENTS=$(curl -s -H "Authorization: Basic $PAT_TOKEN" \
+    "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents?api-version=${API_VERSION}")
 
-# Loop through each agent and delete the offline agents
-for AGENT in $(echo $AGENTS | jq -r '.value[].id')
-do
-  STATUS=$(echo $AGENTS | jq -r --arg AGENTID "$AGENT" '.value[] | select(.id == ($AGENTID | tonumber)) | .status')
+# Delete offline agents
+for AGENT in $(echo $AGENTS | jq -r '.value[].id'); do
+  STATUS=$(echo $AGENTS | jq -r --arg AGENTID "$AGENT" \
+    '.value[] | select(.id == ($AGENTID | tonumber)) | .status')
 
-  if [ "$STATUS" == "offline" ]
-  then
+  if [ "$STATUS" == "offline" ]; then
     echo "Deleting agent with ID $AGENT"
-    curl -s -X DELETE -H "Authorization: Basic $PAT_TOKEN" "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents/${AGENT}?api-version=${API_VERSION}"
+    curl -s -X DELETE -H "Authorization: Basic $PAT_TOKEN" \
+        "${ORG_URL}/_apis/distributedtask/pools/${POOL_ID}/agents/${AGENT}?api-version=${API_VERSION}"
   fi
 done
 ```
+
+## Conclusion
+
+This script simplifies the process of managing offline agents in Azure DevOps, ensuring your agent pools remain clean and efficient. Automating this task can save time and reduce manual effort.

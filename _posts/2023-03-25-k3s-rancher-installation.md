@@ -1,51 +1,55 @@
 ---
-title: K3S & Rancher Installation Script
+title: "K3S and Rancher: A Complete Installation Guide"
 date: 2023-03-25 19:10:00 +0700
-categories: [Devops, Kubernetes]
-tags: [Devops, Kubernetes, K3S, Rancher]
+categories: ["DevOps", "Kubernetes"]
+tags: ["DevOps", "Kubernetes", "K3S", "Rancher", "Installation"]
 pin: false
 ---
 
-## Why K3S and Rancher?
+# K3S and Rancher: A Complete Installation Guide
 
-K3s is a lightweight, certified Kubernetes distribution designed for production workloads in resource-constrained environments such as edge, IoT, and ARM-based systems. It was developed by Rancher Labs, a software company that provides open-source tools and solutions for managing and deploying containers and Kubernetes.
+K3S and Rancher together provide a lightweight yet powerful solution for managing Kubernetes clusters. This guide walks you through the installation process, from prerequisites to deploying Rancher with SSL.
 
-Rancher is a complete software stack for teams adopting containers. It addresses the operational and security challenges of managing multiple Kubernetes clusters, while providing DevOps teams with integrated tools for running containerized workloads. Rancher provides centralized management, monitoring, and alerting for multiple clusters, regardless of where they are located, and it includes a rich set of features for automating the deployment and scaling of containerized applications.
+## Why Choose K3S and Rancher?
 
-K3s is a popular Kubernetes distribution that is often used with Rancher, as Rancher provides an easy-to-use interface for managing K3s clusters. Together, K3s and Rancher provide a lightweight and powerful solution for deploying and managing containerized workloads at scale.
+### K3S
 
-## Rancher support matrix
+K3S is a lightweight, certified Kubernetes distribution designed for resource-constrained environments like edge computing, IoT, and ARM-based systems. It simplifies Kubernetes deployment while maintaining compatibility with standard Kubernetes tools.
 
-The Rancher support matrix is a table that lists the versions of Kubernetes, Rancher, and other components that are compatible with each other. It is used to help users determine which versions of Rancher and Kubernetes they should use together, and which versions of other components are compatible with those versions.
+### Rancher
 
-The matrix is divided into three sections:
+Rancher is a comprehensive platform for managing multiple Kubernetes clusters. It offers centralized management, monitoring, and automation tools, making it easier to deploy and scale containerized applications.
 
-Rancher Server Support Matrix: This section lists the versions of Rancher that are compatible with each version of Kubernetes. It also lists the versions of Docker, Helm, and Istio that are supported with each version of Rancher.
+Together, K3S and Rancher provide a robust solution for Kubernetes management, especially in environments with limited resources.
 
-Kubernetes Version Support Matrix: This section lists the versions of Kubernetes that are compatible with each version of Rancher. It also lists the versions of etcd, Calico, and other components that are supported with each version of Kubernetes.
+## Prerequisites
 
-Rancher Kubernetes Engine (RKE) Support Matrix: This section lists the versions of RKE that are compatible with each version of Kubernetes. It also lists the versions of Docker, etcd, and other components that are supported with each version of RKE.
+Before you begin, ensure you have:
 
-The Rancher support matrix is regularly updated to reflect the latest versions and compatibility information. It is important to consult the matrix before deploying Rancher and Kubernetes, to ensure that you are using compatible versions of all components.
+- A server or Raspberry Pi with a supported operating system.
+- Root or sudo access to the server.
+- A domain name for accessing Rancher.
 
-## Raspberry Pi configuration
+## Step-by-Step Installation
 
-Open `/boot/firmware/cmdline.txt`, add `cgroup_memory=1 cgroup_enable=memory` to the very end of the file:
+### 1. Configure Raspberry Pi (if applicable)
+
+For Raspberry Pi, enable memory cgroups by editing `/boot/firmware/cmdline.txt`:
 
 ```ini
 console=serial0,115200 console=tty1 root=PARTUUID=96955a5f-02 rootfstype=ext4 fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles cfg80211.ieee80211_regdom=VN cgroup_memory=1 cgroup_enable=memory
 ```
 
-## Full script
+### 2. Install K3S, Helm, and cert-manager
 
-### Install K3S, Helm and cert-manager
+Use the following script to install K3S, Helm, and cert-manager:
 
 ```bash
 #!/bin/bash
 
 # Set K3S_VERSION to the desired version
 export INSTALL_K3S_VERSION=v1.27.11+k3s1
-export DOMAIN="thanhtunguet.info"
+export DOMAIN="example.com"
 export K3S_EMAIL="admin@${DOMAIN}"
 export RANCHER_HOSTNAME="rancher.${DOMAIN}"
 export SSL_CERTIFICATE="/etc/letsencrypt/live/${DOMAIN}/fullchain.pem"
@@ -61,34 +65,29 @@ sleep 5
 # Install Helm
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-# Get the K3S cluster token and server URL
-export K3S_NODE_TOKEN=$(sudo cat /var/lib/rancher/k3s/server/node-token)
-echo "K3S_NODE_TOKEN=\"${K3S_NODE_TOKEN}\""
-
 # Add the Jetstack Helm repository
 helm repo add jetstack https://charts.jetstack.io
-
-# Update your local Helm chart repository cache
 helm repo update
 
-# Install the cert-manager Helm chart
+# Install cert-manager
 helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --set installCRDs=true
 ```
 
-### Add Rancher repository (stable)
+### 3. Add Rancher Repository
+
+Add the Rancher Helm repository:
 
 ```bash
-# Add Rancher repository
 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
-
-# Update your local Helm chart repository cache
 helm repo update
 ```
 
-### Install Rancher using LetsEncrypt
+### 4. Install Rancher
+
+#### Option 1: Using Let's Encrypt
 
 ```bash
 helm install rancher rancher-stable/rancher \
@@ -101,7 +100,7 @@ helm install rancher rancher-stable/rancher \
   --set replicas=1
 ```
 
-### Install Rancher using external SSL certificate
+#### Option 2: Using External SSL Certificates
 
 ```bash
 helm install rancher rancher-stable/rancher \
@@ -114,3 +113,7 @@ kubectl -n cattle-system create secret tls tls-rancher-ingress \
   --cert="${SSL_CERTIFICATE}" \
   --key="${SSL_PRIVATE_KEY}"
 ```
+
+## Conclusion
+
+By following this guide, you can set up K3S and Rancher to manage Kubernetes clusters efficiently. This setup is ideal for resource-constrained environments and provides a scalable solution for containerized workloads.
