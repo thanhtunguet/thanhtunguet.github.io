@@ -1,15 +1,12 @@
 ---
-# the default layout is 'page'
 icon: fas fa-info-circle
 order: 4
-title: '👋 Hi, I'm Pham Thanh Tung — Engineer | Builder | Startup Co-founder'
+title: 👋 Hi, I'm Pham Thanh Tung — Engineer | Builder | Startup Co-founder
 ---
 
 I’m a full-stack product engineer with a strong foundation in system architecture, DevOps, and cross-platform mobile development. Over the past years, I’ve helped build scalable, real-world systems — from anonymous chatbots to government-grade procurement system, IoT solutions — and recently, I'm exploring how Generative AI can supercharge product delivery in early-stage startups.
 
 I’m currently a co-founder and tech lead at a startup in Hanoi, where I combine **technical leadership**, **team mentoring**, and **hands-on development** to bring products from zero to one.
-
----
 
 ## 🔧 Core Strengths
 

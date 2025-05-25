@@ -1,13 +1,13 @@
 ---
-title: Xử lý Permission trong React Native
+title: Handling Permissions in React Native
 date: 2022-10-29 19:10:00 +0700
 categories: ["Mobile Development", "React Native"]
 tags: ["Mobile Development", "React Native", "Libraries"]
 pin: false
 ---
 
-`react-native-permissions` là thư viện quản lý permission rất phổ biến trong thế giới React Native.
-Nó cung cấp một hướng dẫn cụ thể về luồng xử lý permission trong ứng dụng như sau:
+`react-native-permissions` is a very popular library for managing permissions in the React Native world.
+It provides a specific guide on the permission handling flow in the application as follows:
 
 ### iOS flow
 
@@ -160,20 +160,20 @@ Nó cung cấp một hướng dẫn cụ thể về luồng xử lý permission 
             └─────────────────┘
 ```
 
-Vậy câu hỏi là: chúng ta implement nó trong code như thế nào?
+So the question is: how do we implement it in code?
 
-Về cơ bản, chúng ta sẽ cần xử lý các trường hợp sau:
+Basically, we will need to handle the following cases:
 
-- Yêu cầu permission trong component
-- Yêu cầu permission khi có sự kiện xảy ra (users touched the button, ...)
+- Request permission in a component
+- Request permission when an event occurs (users touched the button, ...)
 
-Với mỗi loại permission, ta sẽ cần 3 method như sau:
+For each type of permission, we will need 3 methods as follows:
 
-- `usePermission`: hook sử dụng trong component hoặc custom hook
-- `checkPermission`: kiểm tra permission
-- `requestPermission`: yêu cầu permission
+- `usePermission`: hook used in a component or custom hook
+- `checkPermission`: check permission
+- `requestPermission`: request permission
 
-Ta viết thành abstract class như sau:
+We write it as an abstract class as follows:
 
 ```typescript
 export function usePermission(this: AbstractPermissionService) {
@@ -236,9 +236,9 @@ export abstract class AbstractPermissionService extends Service {
 }
 ```
 
-Đối với mỗi permission, tạo một class xử lý permission riêng, kế thừa từ `AbstractPermissionService` và implement các method và getter tương ứng.
+For each permission, create a separate class to handle the permission, inheriting from `AbstractPermissionService` and implementing the corresponding methods and getter.
 
-## Ví dụ:
+## Example:
 
 ### Location permission
 
@@ -266,7 +266,7 @@ export class CameraService extends AbstractGeolocationService {
 }
 ```
 
-## Sử dụng trong component
+## Usage in a component
 
 ```typescript
 function ExampleComponent() {
