@@ -9,3 +9,10 @@
 ';
 
 /* append your custom style below */
+
+.content {
+  p, div, ol, ul {
+    text-align: justify;
+  }
+}
+
