@@ -1,7 +1,7 @@
 ---
 title: Setting Up a Development Environment for macOS for Mobile Programming (Part 1)
 date: 2023-03-28 10:10:00 +0700
-categories: ["Mobile Development", macOS]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", macOS", "Homebrew", "ZSH", "NVM"]
 pin: false
 ---

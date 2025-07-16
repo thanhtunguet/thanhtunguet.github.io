@@ -1,7 +1,7 @@
 ---
 title: "Prompt Engineering: Crafting Effective Instructions for AI Models"
 date: 2025-04-15 07:50:00 +0700
-categories: [AI, Prompt Engineering]
+categories: ["Artificial Intelligence", "LLMs"]
 tags: [AI, LLM, Prompt Engineering]
 pin: false
 ---

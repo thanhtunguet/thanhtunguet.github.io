@@ -1,7 +1,7 @@
 ---
 title: "How to Install Android SDK and Command-Line Tools on Ubuntu Without Android Studio"
 date: 2024-05-22 02:24:34 +0700
-categories: ["Mobile Development", "Android"]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", "Android Studio", "Command-Line Tools"]
 pin: false
 ---

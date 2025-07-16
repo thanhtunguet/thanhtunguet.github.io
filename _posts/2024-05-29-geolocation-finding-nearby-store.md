@@ -1,7 +1,7 @@
 ---
 title: "Finding Nearby Stores Using GPS Location in a Large Database with .NET Core"
 date: 2024-05-29 00:01:00 +0700
-categories: [Programming, .NET Core]
+categories: ["Software Development", "Backend"]
 tags: [Programming, .NET Core]
 pin: false
 mermaid: true

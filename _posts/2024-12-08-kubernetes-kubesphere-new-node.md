@@ -2,7 +2,7 @@
 title: "Adding a New Node to a Kubernetes Cluster Managed by KubeSphere"
 date: 2024-12-08 12:30:00 +0700
 categories: [Devops, Kubernetes]
-categories: [Devops, Kubernetes, Kubesphere]
+categories: ["DevOps", "Containers"]
 pin: false
 mermaid: false
 ---

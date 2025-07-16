@@ -1,7 +1,7 @@
 ---
 title: Generating Entity Classes for supa_architecture Using ChatGPT
 date: 2025-02-13 00:01:00 +0700
-categories: [Mobile Development, Flutter]
+categories: ["Artificial Intelligence", "LLMs"]
 tags: [Mobile Development, Flutter]
 pin: false
 ---

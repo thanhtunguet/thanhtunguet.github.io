@@ -1,7 +1,7 @@
 ---
 title: "Minify all JS and CSS files in a given directory, using Node.js"
 date: 2024-03-09 00:01:00 +0700
-categories: ["Programming", "Javascript"]
+categories: ["Software Development", "Web"]
 tags: [Programming, Javascript, "Node.js"]
 pin: false
 ---

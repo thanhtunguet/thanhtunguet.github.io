@@ -1,7 +1,7 @@
 ---
 title: Automate Triggering All Pipelines in Azure DevOps
 date: 2023-08-26 10:10:00 +0700
-categories: [DevOps, Azure DevOps]
+categories: ["DevOps", "CI/CD"]
 tags: [DevOps, Azure DevOps, Automation, Scripts]
 pin: false
 ---

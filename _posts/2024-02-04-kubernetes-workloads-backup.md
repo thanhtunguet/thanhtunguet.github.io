@@ -1,7 +1,7 @@
 ---
 title: "Automating Kubernetes Workload Backups with Bash and Git"
 date: 2024-02-04 07:45:00 +0700
-categories: [Devops, Kubernetes]
+categories: ["DevOps", "Containers"]
 tags: [Devops, Kubernetes, Linux, Scripts]
 pin: false
 ---

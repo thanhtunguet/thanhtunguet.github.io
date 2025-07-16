@@ -1,7 +1,7 @@
 ---
 title: "How to Configure a Linux Environment for Android CI/CD Without Android Studio"
 date: 2024-09-08 12:30:00 +0700
-categories: ["Mobile Development", "Android"]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", "Android", "Linux"]
 pin: false
 mermaid: true

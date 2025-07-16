@@ -1,7 +1,7 @@
 ---
 title: "Creating a Bill Scanner App on iOS"
 date: 2024-05-18 00:01:00 +0700
-categories: [Mobile Development, "iOS"]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", "iOS"]
 pin: false
 ---

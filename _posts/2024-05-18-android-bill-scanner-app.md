@@ -1,7 +1,7 @@
 ---
 title: "Creating a Bill Scanner App on Android"
 date: 2024-05-18 00:01:00 +0700
-categories: [Mobile Development, "Android"]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", "Android"]
 pin: false
 ---

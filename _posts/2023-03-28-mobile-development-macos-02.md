@@ -1,7 +1,7 @@
 ---
 title: Setting Up a Development Environment for macOS for Mobile Programming (Part 2)
 date: 2023-03-28 13:10:00 +0700
-categories: ["Mobile Development", macOS]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", macOS", Xcode", "Android Studio", "Flutter"]
 pin: false
 ---

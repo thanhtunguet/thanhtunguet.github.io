@@ -1,7 +1,7 @@
 ---
 title: "Mastering Remote PC Control: A Deep Dive into .NET Core Service Implementation"
 date: 2024-03-09 00:01:00 +0700
-categories: [Programming, ".NET Core"]
+categories: ["Software Development", "Backend"]
 tags: [Programming, ".NET Core", Tutorials]
 pin: false
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Opening Document Files Using Online Viewers from Google and Microsoft"
 date: 2024-05-22 00:01:00 +0700
-categories: [Programming]
+categories: ["Software Development", "Web"]
 tags: [Programming, "Office Viewer"]
 pin: false
 ---

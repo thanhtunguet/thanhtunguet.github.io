@@ -1,7 +1,7 @@
 ---
 title: Automating Certificate Sync Between Ubuntu and Kubernetes Clusters
 date: 2024-09-16 14:10:00 +0700
-categories: [Devops, Kubernetes]
+categories: ["DevOps", "Containers"]
 tags: [Devops, Kubernetes, "Letsencrypt", "Cert Manager"]
 pin: false
 ---

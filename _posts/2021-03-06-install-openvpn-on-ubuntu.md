@@ -1,7 +1,7 @@
 ---
 title: "Install OpenVPN on Ubuntu: A Step-by-Step Guide"
 date: 2020-04-17 19:10:00 +0700
-categories: ["DevOps", "Networking"]
+categories: ["DevOps", "Infrastructure"]
 tags: ["DevOps", "Networking", "OpenVPN", "Ubuntu", "VPN Setup"]
 pin: false
 ---

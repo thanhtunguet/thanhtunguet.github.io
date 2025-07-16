@@ -1,7 +1,7 @@
 ---
 title: "How to Create a Static Technical Blog Using Jekyll and the Chirpy Theme"
 date: 2024-06-20 15:30:00 +0700
-categories: [Sharing, Writing]
+categories: ["Miscellaneous", "Blogging"]
 tags: [Sharing, Technical Blog, Writing]
 pin: false
 mermaid: true

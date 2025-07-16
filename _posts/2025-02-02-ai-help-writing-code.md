@@ -1,7 +1,7 @@
 ---
 title: How Developers Can Use ChatGPT to Write and Optimize Flutter Code
 date: 2025-02-02 10:10:00 +0700
-categories: [AI]
+categories: ["Artificial Intelligence", "LLMs"]
 tags: [AI, LLM, ChatGPT]
 pin: false
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Setting Up SSL on Kubernetes with cert-manager and Let's Encrypt"
 date: 2023-01-29 19:10:00 +0700
-categories: ["DevOps", "Kubernetes"]
+categories: ["DevOps", "Containers"]
 tags: ["DevOps", "Kubernetes", "SSL", "Let's Encrypt", "cert-manager"]
 pin: false
 ---

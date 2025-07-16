@@ -1,7 +1,7 @@
 ---
 title: "K3S and Rancher: A Complete Installation Guide"
 date: 2023-03-25 19:10:00 +0700
-categories: ["DevOps", "Kubernetes"]
+categories: ["DevOps", "Containers"]
 tags: ["DevOps", "Kubernetes", "K3S", "Rancher", "Installation"]
 pin: false
 ---

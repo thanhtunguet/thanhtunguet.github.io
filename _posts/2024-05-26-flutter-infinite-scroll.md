@@ -1,7 +1,7 @@
 ---
 title: "How to Create a Simple Infinite Scroll List in Flutter"
 date: 2024-05-24 00:01:00 +0700
-categories: [Mobile Development, Flutter]
+categories: ["Software Development", "Mobile"]
 tags: [Mobile Development, Flutter]
 pin: false
 ---

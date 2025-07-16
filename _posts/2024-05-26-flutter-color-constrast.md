@@ -1,7 +1,7 @@
 ---
 title: "Understanding Color Contrast and Its Impact on Human Eyes"
 date: 2024-05-26 00:01:00 +0700
-categories: [Mobile Development, Flutter]
+categories: ["Software Development", "Mobile"]
 tags: [Mobile Development, Flutter]
 pin: false
 ---

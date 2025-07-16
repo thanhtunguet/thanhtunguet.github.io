@@ -1,7 +1,7 @@
 ---
 title: Understanding Kubernetes Pod Limitations and Scaling Deployments for Resource Efficiency
 date: 2023-10-29 10:10:00 +0700
-categories: [Devops, Kubernetes]
+categories: ["DevOps", "Containers"]
 tags: [Devops, Kubernetes, Scripts]
 pin: false
 ---

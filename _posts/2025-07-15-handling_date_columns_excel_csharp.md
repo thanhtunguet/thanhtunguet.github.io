@@ -1,7 +1,7 @@
 ---
 title: "Handling Date Columns When Importing Excel Files in C#"
 date: 2025-07-15 20:10:00 +0700
-categories: [Programming, "C#"]
+categories: ["Software Development", "Backend"]
 tags: [Programming, "C#", "Excel handling"]
 pin: false
 ---

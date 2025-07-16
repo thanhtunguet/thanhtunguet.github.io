@@ -1,7 +1,7 @@
 ---
 title: "Android Splash Screen: Best Practices for 2025"
 date: 2017-04-11 19:10:00 +0700
-categories: ["Mobile Development", "Android"]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", "Android", "Best Practices", "UI/UX"]
 pin: false
 ---

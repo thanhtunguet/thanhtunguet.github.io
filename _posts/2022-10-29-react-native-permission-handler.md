@@ -1,7 +1,7 @@
 ---
 title: "Mastering Permissions in React Native with react-native-permissions"
 date: 2022-10-29 19:10:00 +0700
-categories: ["Mobile Development", "React Native"]
+categories: ["Software Development", "Mobile"]
 tags: ["Mobile Development", "React Native", "Permissions", "Libraries"]
 pin: false
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Introducing supa_l10n_manager: A Scalable Flutter Localization Solution"
 date: 2025-02-10 00:01:00 +0700
-categories: [Mobile Development, Flutter]
+categories: ["Software Development", "Mobile"]
 tags: [Mobile Development, Flutter]
 pin: false
 ---

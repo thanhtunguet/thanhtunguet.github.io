@@ -1,7 +1,7 @@
 ---
 title: "TypeScript JSON Casting: Strong Typing with Decorators"
 date: 2020-07-08 00:01:00 +0700
-categories: ["Programming", "TypeScript"]
+categories: ["Software Development", "Web"]
 tags: ["Programming", "TypeScript", "JSON", "Decorators", "Strong Typing"]
 pin: false
 ---
