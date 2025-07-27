@@ -24,7 +24,7 @@ jobs:
           node-version: lts/*
 
       - name: Install Dependencies
-        run: npm ci
+        run: yarn install
 
       - name: Lint JS
         run: npm run lint:js
