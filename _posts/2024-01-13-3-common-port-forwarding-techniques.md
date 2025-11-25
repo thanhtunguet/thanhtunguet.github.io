@@ -1,8 +1,8 @@
 ---
 title: "A Comprehensive Comparison of 3 Port-Forwarding Techniques: Linux UFW, Nginx Stream Proxy, and SSH Port-Forwarding"
 date: 2024-01-13 10:10:00 +0700
-categories: [Devops, Networks]
-tags: [Devops, Networks, Linux, Port Forwarding]
+categories: [DevOps, Networks]
+tags: [DevOps, Networks, Linux, Port Forwarding]
 pin: false
 ---
 

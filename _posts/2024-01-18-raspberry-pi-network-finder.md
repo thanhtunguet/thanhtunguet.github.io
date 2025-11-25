@@ -2,7 +2,7 @@
 title: "How to Find Your Raspberry Pi Address When Connected to a DHCP Network"
 date: 2024-01-18 10:10:00 +0700
 categories: ["Hardware", "IoT"]
-tags: [Devops, Linux, Raspberry Pi]
+tags: [DevOps, Linux, Raspberry Pi]
 pin: false
 ---
 

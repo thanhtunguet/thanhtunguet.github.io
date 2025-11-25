@@ -2,7 +2,7 @@
 title: "Managing Storage Consumption on CI/CD Agent Machines: A Practical Guide"
 date: 2024-08-14 15:30:00 +0700
 categories: ["DevOps", "CI/CD"]
-tags: ["Devops", Linux]
+tags: ["DevOps", Linux]
 pin: false
 mermaid: true
 ---

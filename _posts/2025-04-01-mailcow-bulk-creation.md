@@ -2,7 +2,7 @@
 title: "Automating Mailcow Mailbox Creation with Selenium and TypeScript"
 date: 2025-04-01 12:30:00 +0700
 categories: ["DevOps", "Infrastructure"]
-tags: ["Devops", "Mailcow", "Automation"]
+tags: ["DevOps", "Mailcow", "Automation"]
 pin: false
 mermaid: true
 ---

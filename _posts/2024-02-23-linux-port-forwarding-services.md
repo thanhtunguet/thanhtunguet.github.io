@@ -2,7 +2,7 @@
 title: "Creating port-forwarding service for Linux to expose your server to Internet"
 date: 2024-02-04 07:45:00 +0700
 categories: ["DevOps", "Infrastructure"]
-tags: [Devops, SSH, Linux, Scripts]
+tags: [DevOps, SSH, Linux, Scripts]
 pin: false
 ---
 

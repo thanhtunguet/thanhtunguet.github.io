@@ -2,7 +2,7 @@
 title: "Using Visual Studio Code with Kubernetes Extension for Port Forwarding"
 date: 2024-05-24 00:01:00 +0700
 categories: ["DevOps", "Containers"]
-tags: ["Devops", "Kubernetes", "Rancher", "Visual Studio Code"]
+tags: ["DevOps", "Kubernetes", "Rancher", "Visual Studio Code"]
 pin: false
 ---
 

@@ -2,7 +2,7 @@
 title: "Create Linux desktop entry for LM Studio"
 date: 2024-05-10 00:01:00 +0700
 categories: ["DevOps", "Infrastructure"]
-tags: ["Devops", "Linux"]
+tags: ["DevOps", "Linux"]
 pin: false
 ---
 

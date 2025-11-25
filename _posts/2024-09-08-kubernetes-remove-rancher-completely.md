@@ -2,7 +2,7 @@
 title: "How to Completely Remove Rancher from a Kubernetes Cluster"
 date: 2024-09-08 12:45:00 +0700
 categories: ["DevOps", "Containers"]
-tags: ["Devops", "Kubernetes", "Linux", "Rancher"]
+tags: ["DevOps", "Kubernetes", "Linux", "Rancher"]
 pin: false
 mermaid: true
 ---

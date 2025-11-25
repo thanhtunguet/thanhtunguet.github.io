@@ -2,7 +2,7 @@
 title: "How to sync container images to your private registry"
 date: 2024-01-21 07:45:00 +0700
 categories: ["DevOps", "Containers"]
-tags: [Devops, Linux, Docker, Private Registry]
+tags: [DevOps, Linux, Docker, Private Registry]
 pin: false
 ---
 

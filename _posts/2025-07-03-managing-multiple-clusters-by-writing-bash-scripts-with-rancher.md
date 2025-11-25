@@ -2,7 +2,7 @@
 title: "Managing Multiple Kubernetes Clusters with Smart Bash Scripts: A DevOps Engineer's Toolkit"
 date: 2025-07-03 07:50:00 +0700
 categories: ["DevOps", "Containers"]
-tags: [Devops, Kubernetes, Rancher]
+tags: [DevOps, Kubernetes, Rancher]
 pin: false
 ---
 

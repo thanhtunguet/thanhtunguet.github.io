@@ -2,7 +2,7 @@
 title: "Keep Server Software Up-to-Date by Allowing Package URLs for common software"
 date: 2024-01-13 10:10:00 +0700
 categories: ["DevOps", "Infrastructure"]
-tags: [Devops, Linux, Docker]
+tags: [DevOps, Linux, Docker]
 pin: false
 ---
 

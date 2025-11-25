@@ -2,7 +2,7 @@
 title: Automating SSL Certificate Renewal and Reload for Azure DevOps Server on Windows Using Let's Encrypt
 date: 2024-09-13 07:10:00 +0700
 categories: ["DevOps", "CI/CD"]
-tags: [Devops, Azure Devops, Scripts]
+tags: [DevOps, Azure DevOps, Scripts]
 pin: false
 ---
 

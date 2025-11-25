@@ -2,7 +2,7 @@
 title: "Why Proxying Maven Packages with Nexus on Your Own Server is Essential"
 date: 2024-08-25 15:30:00 +0700
 categories: ["DevOps", "Infrastructure"]
-tags: ["Devops", Linux, "Android", "Mobile Development"]
+tags: ["DevOps", Linux, "Android", "Mobile Development"]
 pin: false
 mermaid: true
 ---
