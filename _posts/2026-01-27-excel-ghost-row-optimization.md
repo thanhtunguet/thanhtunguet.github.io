@@ -21,7 +21,7 @@ This wasn't just a minor inconvenience. In a business environment where users mi
 
 The obvious solution to UI blocking was to move the Excel parsing off the main thread. I implemented a Web Worker to handle the file processing:
 
-```typescript
+```tsx
 // Main thread stays responsive
 const worker = new Worker(new URL('./excelParser.worker', import.meta.url));
 worker.postMessage({ file });
@@ -42,7 +42,7 @@ The UI no longer froze, and users could see a nice "Processing..." spinner. But 
 
 I decided to add detailed performance logging to understand where the time was going:
 
-```typescript
+```tsx
 console.log('[Excel Worker] Convert ArrayBuffer to binary string:', time1);
 console.log('[Excel Worker] Parse Excel file:', time2);
 console.log('[Excel Worker] Convert worksheet to JSON:', time3);
@@ -114,7 +114,7 @@ In our case, the user had likely copied data from another source, pasted it into
 
 When you call `XLSX.utils.sheet_to_json()`, the library processes **every row in the file's range**, not just rows with data:
 
-```typescript
+```tsx
 // This converts ALL 1,048,562 rows to JSON objects
 const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
@@ -156,7 +156,7 @@ After analyzing the performance data and understanding the problem, I designed a
 
 Our business context: users import order data. Even bulk imports rarely exceed a few thousand orders. I set a hard limit:
 
-```typescript
+```tsx
 const MAX_ROWS_TO_PROCESS = 10000;
 ```
 
@@ -172,7 +172,7 @@ If a file claims to have 1,048,562 rows, we process the first 10,000 and ignore 
 
 The original approach:
 
-```typescript
+```tsx
 // ❌ OLD: Convert entire sheet to JSON (1M+ rows at once)
 const jsonData = XLSX.utils.sheet_to_json(worksheet);
 // Result: 12.8 seconds, 500MB memory spike
@@ -180,7 +180,7 @@ const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
 The new approach:
 
-```typescript
+```tsx
 // ✅ NEW: Read in small batches
 const BATCH_SIZE = 500;
 
@@ -237,7 +237,7 @@ I implemented three distinct states:
 
 The cancel button terminates the worker and clears all accumulated data:
 
-```typescript
+```tsx
 const handleCancel = () => {
   worker.terminate();  // Kill the worker
   allData = [];        // Clear received data
@@ -258,7 +258,7 @@ The worker needs to:
 4. Send progress updates
 5. Respect the 10k row limit
 
-```typescript
+```tsx
 // excelParser.worker.ts
 const MAX_ROWS_TO_PROCESS = 10000;
 const BATCH_SIZE = 500;
@@ -360,7 +360,7 @@ The main thread needs to:
 4. Handle cancellation
 5. Clean up when done
 
-```typescript
+```tsx
 // excelImportService.ts
 export const processExcelFile = async (
   file: File,
@@ -450,7 +450,7 @@ export const processExcelFile = async (
 The React component ties it all together:
 
 {% raw %}
-```typescript
+```tsx
 const ExcelImportDialog = () => {
   const [status, setStatus] = useState<ImportStatus | null>(null);
   const cancelSignal = useRef({ cancelled: false });
@@ -623,7 +623,7 @@ If you're building Excel import functionality, here's my advice:
 
 ### 1. Set Practical Row Limits
 
-```typescript
+```tsx
 // Don't do this
 const data = XLSX.utils.sheet_to_json(worksheet); // Unlimited!
 
@@ -634,14 +634,14 @@ const totalRows = Math.min(range.e.r + 1, MAX_ROWS);
 
 ### 2. Always Use Web Workers for File Processing
 
-```typescript
+```tsx
 // Any operation that might take > 50ms should be in a worker
 const worker = new Worker(new URL('./fileProcessor.worker', import.meta.url));
 ```
 
 ### 3. Provide Progress and Control
 
-```typescript
+```tsx
 // Show what's happening
 onProgress({ message: 'Processing 2,500 / 10,000 rows (25%)' });
 
@@ -652,7 +652,7 @@ worker.terminate();
 
 ### 4. Read in Batches
 
-```typescript
+```tsx
 // Not all at once
 const BATCH_SIZE = 500;
 for (let start = 0; start < total; start += BATCH_SIZE) {
@@ -663,7 +663,7 @@ for (let start = 0; start < total; start += BATCH_SIZE) {
 
 ### 5. Validate Early and Often
 
-```typescript
+```tsx
 // Check file size before processing
 if (file.size > 50 * 1024 * 1024) { // 50MB
   throw new Error('File quá lớn');
